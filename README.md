@@ -8,10 +8,15 @@ Nu Joop en Ans een systeem hebben waarin al deze informatie wordt verzameld, wil
 
 Eisen/wensen:
 -	Een inlogsysteem dat ervoor zorgt dat alleen medewerkers en Joop en Ans onderdelen kunnen aanpassen. (Mederwerkers mogen alleen toevoegen en wijzigen)
+  
 -	Beheer van codeblokkenpakketten, merken en thema’s, inclusief rechtenbeheer.
+  
 -	Zorg voor een overzicht van alle pakketten met paginering, zodat de pagina zelf niet te lang wordt en bij voorkeur zonder dat er gescrold hoeft te worden.
+  
 -	Mogelijkheid om pakketten te filteren op merk en thema.
+  
 -	Mogelijkheid om pakketten te zoeken op basis van leeftijd, aantal steentjes en prijs.
+  
 -	Detailpagina per pakket met alle informatie.
 
 
