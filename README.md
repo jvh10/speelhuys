@@ -6,7 +6,7 @@ Een optimale speelervaring begint bij het Speelhuys. Door de jaren heen hebben J
 Joop en Ans willen graag een database waarin ze alle Lego- en Duplo-objecten kunnen plaatsen. Elk object heeft verschillende eigenschappen die zichtbaar en beheersbaar moeten zijn. Omdat Joop en Ans een dagje ouder worden, hebben ze nu twee medewerkers die 2,5 dag per week werken. Deze medewerkers moeten toegang hebben tot het systeem, maar mogen alleen objecten toevoegen en wijzigen, niet verwijderen. Dit voorrecht is voorbehouden aan Joop en Ans.
 Nu Joop en Ans een systeem hebben waarin al deze informatie wordt verzameld, willen ze ook dat bezoekers op de website de producten kunnen bekijken. Ze moeten kunnen zien wat een product precies inhoudt en of het op voorraad is. Niemand wil dat vaste klanten een lange reis maken voor niets.
 
-Eisen/wensen:
+Eisen/wensen:  
 -	Een inlogsysteem dat ervoor zorgt dat alleen medewerkers en Joop en Ans onderdelen kunnen aanpassen. (Mederwerkers mogen alleen toevoegen en wijzigen)
   
 -	Beheer van codeblokkenpakketten, merken en thema’s, inclusief rechtenbeheer.
