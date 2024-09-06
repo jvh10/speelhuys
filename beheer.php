@@ -25,23 +25,25 @@
             </nav>
         </div>
         <div class="row">
-            <div class="dropdown">
-                <button onclick="myFunction()" class="dropbtn">Brands</button>
-                <div id="myDropdown" class="dropdown-content">
-                    <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()"><br>
-                    <label><input type="radio" name="brand"> Lego </label><br>
-                    <label><input type="radio" name="brand"> Kapla </label><br>
-                    <label><input type="radio" name="brand"> Duplo </label><br>
-                    <label><input type="radio" name="brand"> RoboTime </label><br>
-                    <label><input type="radio" name="brand"> SmartMax </label><br>
-                    <label><input type="radio" name="brand"> Brio </label><br>
-                    <label><input type="radio" name="brand"> Playmobil </label><br>
-                    <label><input type="radio" name="brand"> MegaBlocks </label><br>
-                    <label><input type="radio" name="brand"> MegaConstrux </label><br>
-                    <label><input type="radio" name="brand"> Geomag </label><br>
-                    <label><input type="radio" name="brand"> Knex </label><br>
-                    <label><input type="radio" name="brand"> GraviTrax </label><br>
-                    <label><input type="radio" name="brand"> Clementoni </label><br>
+            <div class="col-2">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Brands</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="width: 160px;"><br>
+                        <label><input type="radio" name="brand"> Lego </label><br>
+                        <label><input type="radio" name="brand"> Kapla </label><br>
+                        <label><input type="radio" name="brand"> Duplo </label><br>
+                        <label><input type="radio" name="brand"> RoboTime </label><br>
+                        <label><input type="radio" name="brand"> SmartMax </label><br>
+                        <label><input type="radio" name="brand"> Brio </label><br>
+                        <label><input type="radio" name="brand"> Playmobil </label><br>
+                        <label><input type="radio" name="brand"> MegaBlocks </label><br>
+                        <label><input type="radio" name="brand"> MegaConstrux </label><br>
+                        <label><input type="radio" name="brand"> Geomag </label><br>
+                        <label><input type="radio" name="brand"> Knex </label><br>
+                        <label><input type="radio" name="brand"> GraviTrax </label><br>
+                        <label><input type="radio" name="brand"> Clementoni </label><br>
+                    </div>
                 </div>
             </div>
         </div>
