@@ -22,13 +22,8 @@
     </div>
     <div class="row">
       <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names..">
-
-      <ul id="myUL">
-        <br></br>
-        Brands<br>
-        <input type="radio">Lego
-      </ul>
     </div>
+    
   </div>
 </body>
 
