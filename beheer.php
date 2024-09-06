@@ -57,6 +57,7 @@
             </nav>
         </div>
         <div class="row">
+<<<<<<< HEAD
         <div class="sidebar">
         <div class="filter-group">
             <label for="search">Search</label>
@@ -80,6 +81,29 @@
             <label><input type="checkbox" value="25-50" onchange="applyFilters()"> $25 - $50</label>
             <label><input type="checkbox" value="50-100" onchange="applyFilters()"> $50 - $100</label>
             <label><input type="checkbox" value="100-200" onchange="applyFilters()"> $100 - $200</label>
+=======
+            <div class="col-2">
+                <div class="dropdown">
+                    <button onclick="myFunction()" class="dropbtn">Brands</button>
+                    <div id="myDropdown" class="dropdown-content">
+                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="width: 160px;"><br>
+                        <label><input type="radio" name="brand"> Lego </label><br>
+                        <label><input type="radio" name="brand"> Kapla </label><br>
+                        <label><input type="radio" name="brand"> Duplo </label><br>
+                        <label><input type="radio" name="brand"> RoboTime </label><br>
+                        <label><input type="radio" name="brand"> SmartMax </label><br>
+                        <label><input type="radio" name="brand"> Brio </label><br>
+                        <label><input type="radio" name="brand"> Playmobil </label><br>
+                        <label><input type="radio" name="brand"> MegaBlocks </label><br>
+                        <label><input type="radio" name="brand"> MegaConstrux </label><br>
+                        <label><input type="radio" name="brand"> Geomag </label><br>
+                        <label><input type="radio" name="brand"> Knex </label><br>
+                        <label><input type="radio" name="brand"> GraviTrax </label><br>
+                        <label><input type="radio" name="brand"> Clementoni </label><br>
+                    </div>
+                </div>
+            </div>
+>>>>>>> 0d5e112efd5f7d57bf47f93e6c03a978f16c7896
         </div>
     </div>
 
