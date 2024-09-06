@@ -74,12 +74,12 @@
             </select>
         </div>
         
-        <div class="filter-group checkbox-group">
+        <div class="filter-group radio-group">
             <label>Price Range</label>
-            <label><input type="checkbox" value="0-25" onchange="applyFilters()"> $0 - $25</label>
-            <label><input type="checkbox" value="25-50" onchange="applyFilters()"> $25 - $50</label>
-            <label><input type="checkbox" value="50-100" onchange="applyFilters()"> $50 - $100</label>
-            <label><input type="checkbox" value="100-200" onchange="applyFilters()"> $100 - $200</label>
+            <label><input type="radio" name="Price" value="0-25" onchange="applyFilters()"> $0 - $25</label>
+            <label><input type="radio" name="Price" value="25-50" onchange="applyFilters()"> $25 - $50</label>
+            <label><input type="radio" name="Price"  value="50-100" onchange="applyFilters()"> $50 - $100</label>
+            <label><input type="radio" name="Price"  value="100-200" onchange="applyFilters()"> $100 - $200</label>
             <div class="col-2">
                 <div class="dropdown">
                     <button onclick="myFunction()" class="dropbtn">Brands</button>
