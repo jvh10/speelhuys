@@ -80,8 +80,24 @@
             <label><input type="radio" name="Price" value="25-50" onchange="applyFilters()"> $25 - $50</label>
             <label><input type="radio" name="Price"  value="50-100" onchange="applyFilters()"> $50 - $100</label>
             <label><input type="radio" name="Price"  value="100-200" onchange="applyFilters()"> $100 - $200</label>
+            <div class="filter-group radio-group">
+            <label>Price Range</label>
+            <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="width: 160px;"><br>
+                        <label><input type="radio" name="brand"> Lego </label>
+                        <label><input type="radio" name="brand"> Kapla </label>
+                        <label><input type="radio" name="brand"> Duplo </label>
+                        <label><input type="radio" name="brand"> RoboTime </label>
+                        <label><input type="radio" name="brand"> SmartMax </label>
+                        <label><input type="radio" name="brand"> Brio </label>
+                        <label><input type="radio" name="brand"> Playmobil </label>
+                        <label><input type="radio" name="brand"> MegaBlocks </label>
+                        <label><input type="radio" name="brand"> MegaConstrux </label>
+                        <label><input type="radio" name="brand"> Geomag </label>
+                        <label><input type="radio" name="brand"> Knex </label>
+                        <label><input type="radio" name="brand"> GraviTrax </label>
+                        <label><input type="radio" name="brand"> Clementoni </label>
             <div class="col-2">
-                <div class="dropdown">
+                <div class="filter-group radio-group">
                     <button onclick="myFunction()" class="dropbtn">Brands</button>
                     <div id="myDropdown" class="dropdown-content">
                         <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="width: 160px;"><br>
@@ -143,4 +159,4 @@
 </body>
 
 </html>
-oefen
+kaas
