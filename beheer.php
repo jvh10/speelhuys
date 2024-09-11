@@ -1,12 +1,8 @@
-<html>
+<!DOCTYPE html>
+<html lang="nl">
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.7/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"></script>
-    <script src="style.js" type="text/javascript"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -41,7 +37,7 @@
             margin-bottom: 10px;
         }
 
-        .checkbox-group label {
+        .radio-group label {
             display: block;
             margin-bottom: 5px;
         }
@@ -63,100 +59,87 @@
                 </div>
             </nav>
         </div>
+
         <div class="row">
             <div class="sidebar">
-                <div class="filter-group">
-                    <label for="search">Search</label>
-                    <input type="text" id="search" placeholder="Search LEGO sets..." oninput="applyFilters()">
-                </div>
+                <form method="GET" action="">
 
-                <div class="filter-group">
-                    <label for="theme">Select Theme</label>
-                    <select id="theme" onchange="applyFilters()">
-                        <option value="">All Themes</option>
-                        <option value="city">City</option>
-                        <option value="star-wars">Star Wars</option>
-                        <option value="technic">Technic</option>
-                        <option value="creator">Creator</option>
-                    </select>
-                </div>
+                    <div class="filter-group">
+                        <label for="search">Search</label>
+                        <input type="text" id="search" name="search" placeholder="Search LEGO sets..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
+                    </div>
 
-                <div class="filter-group radio-group">
-                    <label>Price Range</label>
-                    <label><input type="radio" name="Price" value="0-25" onchange="applyFilters()"> $0 - $25</label>
-                    <label><input type="radio" name="Price" value="25-50" onchange="applyFilters()"> $25 - $50</label>
-                    <label><input type="radio" name="Price" value="50-100" onchange="applyFilters()"> $50 - $100</label>
-                    <label><input type="radio" name="Price" value="100-200" onchange="applyFilters()"> $100 - $200</label>
+                    <div class="filter-group">
+                        <label for="theme">Select Theme</label>
+                        <select id="theme" name="theme">
+                            <option value="">All Themes</option>
+                            <option value="city" <?= (isset($_GET['theme']) && $_GET['theme'] == 'city') ? 'selected' : '' ?>>City</option>
+                            <option value="star-wars" <?= (isset($_GET['theme']) && $_GET['theme'] == 'star-wars') ? 'selected' : '' ?>>Star Wars</option>
+                            <option value="technic" <?= (isset($_GET['theme']) && $_GET['theme'] == 'technic') ? 'selected' : '' ?>>Technic</option>
+                            <option value="creator" <?= (isset($_GET['theme']) && $_GET['theme'] == 'creator') ? 'selected' : '' ?>>Creator</option>
+                        </select>
+                    </div>
+
                     <div class="filter-group radio-group">
                         <label>Price Range</label>
-                        <input type="text" placeholder="Search.." id="myInput" onkeyup="filterFunction()" style="width: 160px;"><br>
-                        <label><input type="radio" name="brand"> Lego </label>
-                        <label><input type="radio" name="brand"> Kapla </label>
-                        <label><input type="radio" name="brand"> Duplo </label>
-                        <label><input type="radio" name="brand"> RoboTime </label>
-                        <label><input type="radio" name="brand"> SmartMax </label>
-                        <label><input type="radio" name="brand"> Brio </label>
-                        <label><input type="radio" name="brand"> Playmobil </label>
-                        <label><input type="radio" name="brand"> MegaBlocks </label>
-                        <label><input type="radio" name="brand"> MegaConstrux </label>
-                        <label><input type="radio" name="brand"> Geomag </label>
-                        <label><input type="radio" name="brand"> Knex </label>
-                        <label><input type="radio" name="brand"> GraviTrax </label>
-                        <label><input type="radio" name="brand"> Clementoni </label>
+                        <label><input type="radio" name="price" value="0-25" <?= (isset($_GET['price']) && $_GET['price'] == '0-25') ? 'checked' : '' ?>> $0 - $25</label>
+                        <label><input type="radio" name="price" value="25-50" <?= (isset($_GET['price']) && $_GET['price'] == '25-50') ? 'checked' : '' ?>> $25 - $50</label>
+                        <label><input type="radio" name="price" value="50-100" <?= (isset($_GET['price']) && $_GET['price'] == '50-100') ? 'checked' : '' ?>> $50 - $100</label>
+                        <label><input type="radio" name="price" value="100-200" <?= (isset($_GET['price']) && $_GET['price'] == '100-200') ? 'checked' : '' ?>> $100 - $200</label>
                     </div>
-                </div>
 
-                <div class="content">
-                    <div id="results">Please select filters to see results.</div>
-                </div>
+                    <button type="submit" class="btn btn-primary">Apply Filters</button>
+                </form>
+            </div>
 
-                <script>
-                    const legoSets = [{
-                            name: "LEGO City Police Station",
-                            theme: "city",
-                            price: 99.99
-                        },
-                        {
-                            name: "LEGO Star Wars X-Wing",
-                            theme: "star-wars",
-                            price: 49.99
-                        },
-                        {
-                            name: "LEGO Technic Bugatti Chiron",
-                            theme: "technic",
-                            price: 349.99
-                        },
-                        {
-                            name: "LEGO Creator Expert Modular Buildings",
-                            theme: "creator",
-                            price: 179.99
-                        }
-                    ];
+            <div class="content">
+                <h2>Product Results</h2>
 
-                    function applyFilters() {
-                        const searchInput = document.getElementById('search').value.toLowerCase();
-                        const themeSelect = document.getElementById('theme').value;
-                        const priceChecks = Array.from(document.querySelectorAll('.checkbox-group input:checked')).map(cb => cb.value);
+                <?php
+                // Simuleer een lijst van LEGO-sets
+                $legoSets = [
+                    ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99],
+                    ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99],
+                    ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99],
+                    ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99]
+                ];
 
-                        let filteredSets = legoSets.filter(set => {
-                            let matchesSearch = set.name.toLowerCase().includes(searchInput);
-                            let matchesTheme = themeSelect === "" || set.theme === themeSelect;
-                            let matchesPrice = priceChecks.length === 0 || priceChecks.some(range => {
-                                let [min, max] = range.split('-').map(Number);
-                                return set.price >= min && set.price <= max;
-                            });
+                // Filter logic
+                $filteredSets = $legoSets;
 
-                            return matchesSearch && matchesTheme && matchesPrice;
-                        });
+                if (isset($_GET['search']) && !empty($_GET['search'])) {
+                    $search = strtolower($_GET['search']);
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($search) {
+                        return strpos(strtolower($set['name']), $search) !== false;
+                    });
+                }
 
-                        displayResults(filteredSets);
+                if (isset($_GET['theme']) && !empty($_GET['theme'])) {
+                    $theme = $_GET['theme'];
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($theme) {
+                        return $set['theme'] === $theme;
+                    });
+                }
+
+                if (isset($_GET['price']) && !empty($_GET['price'])) {
+                    list($minPrice, $maxPrice) = explode('-', $_GET['price']);
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($minPrice, $maxPrice) {
+                        return $set['price'] >= $minPrice && $set['price'] <= $maxPrice;
+                    });
+                }
+
+                // Resultaat weergeven
+                if (count($filteredSets) > 0) {
+                    foreach ($filteredSets as $set) {
+                        echo "<div>{$set['name']} - \${$set['price']}</div>";
                     }
-
-                    function displayResults(sets) {
-                        const resultsDiv = document.getElementById('results');
-                        resultsDiv.innerHTML = sets.length ? sets.map(set => `<div>${set.name} - $${set.price}</div>`).join('') : "No sets found.";
-                    }
-                </script>
+                } else {
+                    echo "<p>No sets found.</p>";
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 </body>
 
 </html>
