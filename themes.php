@@ -4,49 +4,19 @@ class Theme
 {
     public int $id;
     public string $name;
-    public string $description;
-    public string $brandId;
-    public string $themeId;
-    public string $image;
-    public string $price;
-    public string $age;
-    public string $pieces;
-    public string $stock;
+    
     // met deze functie kan je een nieuwe blog maken en opslaan in de database
     public function insert()
     {
         $conn = Database::start();
 
         $name = mysqli_real_escape_string($conn, $this->name);
-        $description = mysqli_real_escape_string($conn, $this->description);
-        $brandId = mysqli_real_escape_string($conn, $this->brandId);
-        $themeId = mysqli_real_escape_string($conn, $this->themeId);
-        $image = mysqli_real_escape_string($conn, $this->image);
-        $price = mysqli_real_escape_string($conn, $this->price);
-        $age = mysqli_real_escape_string($conn, $this->age);
-        $pieces = mysqli_real_escape_string($conn, $this->pieces);
-        $stock = mysqli_real_escape_string($conn, $this->stock);
 
-        $sql = "INSERT INTO sets (
-            set_name, 
-            set_description,
-            set_brand_id,
-            set_theme_id,
-            set_image,
-            set_price,
-            set_age,
-            set_pieces,
-            set_stock
+        $sql = "INSERT INTO themes (
+            theme_name
+
         )VALUES (
-            '" . $name . "',
-            '" . $description . "',
-            '" . $brandId . "',
-            '" . $themeId . "',
-            '" . $image . "',
-            '" . $price . "',
-            '" . $age . "',
-            '" . $pieces . "',
-            '" . $stock . "'
+            '" . $name . "'
         )";
 
         $conn->query($sql);
@@ -60,31 +30,15 @@ class Theme
 
         $id = mysqli_real_escape_string($conn, $this->id);
         $name = mysqli_real_escape_string($conn, $this->name);
-        $description = mysqli_real_escape_string($conn, $this->description);
-        $brandId = mysqli_real_escape_string($conn, $this->brandId);
-        $themeId = mysqli_real_escape_string($conn, $this->themeId);
-        $image = mysqli_real_escape_string($conn, $this->image);
-        $price = mysqli_real_escape_string($conn, $this->price);
-        $age = mysqli_real_escape_string($conn, $this->age);
-        $pieces = mysqli_real_escape_string($conn, $this->pieces);
-        $stock = mysqli_real_escape_string($conn, $this->stock);
 
 
         $sql = "
             UPDATE
-                sets
+                themes
             SET
-                set_name = '" . $name . "',
-                set_description = '" . $description . "',
-                set_brand_id = '" . $brandId . "',
-                set_theme_id = '" . $themeId . "',
-                set_image = '" . $image . "',
-                set_price = '" . $price . "',
-                set_age = '" . $age . "',
-                set_pieces = '" . $pieces . "',
-                set_stock = '" . $stock . "'
+                theme_name = '" . $name . "'
             WHERE
-                set_id = " . $id . " 
+                theme_id = " . $id . " 
             ";
 
         $conn->query($sql);
@@ -100,9 +54,9 @@ class Theme
 
         $query = "
             DELETE FROM
-                    sets
+                    theme
             WHERE
-                    set_id = '" . $id . "'
+                    theme_id = '" . $id . "'
         ";
 
         $conn->query($query);
