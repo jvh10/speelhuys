@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="nl">
+<?php
+
+include "connectie.php";
+include "sets.php";
+include "user.php";
+include "session.php";
+include "brands.php";
+include "themes.php";
+
+?>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -69,14 +79,19 @@
                         <input type="text" id="search" name="search" placeholder="Search LEGO sets..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
                     </div>
 
+                    <?php
+                    $themes = Theme::findAll();
+
+                    ?>
+
                     <div class="filter-group">
                         <label for="theme">Select Theme</label>
                         <select id="theme" name="theme">
-                            <option value="">All Themes</option>
-                            <option value="city" <?= (isset($_GET['theme']) && $_GET['theme'] == 'city') ? 'selected' : '' ?>>City</option>
-                            <option value="star-wars" <?= (isset($_GET['theme']) && $_GET['theme'] == 'star-wars') ? 'selected' : '' ?>>Star Wars</option>
-                            <option value="technic" <?= (isset($_GET['theme']) && $_GET['theme'] == 'technic') ? 'selected' : '' ?>>Technic</option>
-                            <option value="creator" <?= (isset($_GET['theme']) && $_GET['theme'] == 'creator') ? 'selected' : '' ?>>Creator</option>
+                            <?php foreach ($themes as $theme) : ?>
+                                <option value="<?= $theme->id ?>" <?= (isset($_GET['theme']) && $_GET['theme'] == $theme->id) ? 'selected' : '' ?>>
+                                    <?= $theme->name ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 

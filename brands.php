@@ -1,6 +1,6 @@
 <?php
 
-class Theme
+class Brands
 {
     public int $id;
     public string $name;
