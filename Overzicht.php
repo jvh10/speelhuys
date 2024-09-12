@@ -1,5 +1,15 @@
 <!DOCTYPE html>
 <html lang="nl">
+<?php
+
+include "connectie.php";
+include "sets.php";
+include "user.php";
+include "session.php";
+include "brands.php";
+include "themes.php";
+
+?>
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
@@ -69,38 +79,33 @@
                         <input type="text" id="search" name="search" placeholder="Search LEGO sets..." value="<?= isset($_GET['search']) ? $_GET['search'] : '' ?>">
                     </div>
 
+                    <?php
+                    $themes = Theme::findAll();
+                    $brands = Brand::findAll();
+
+                    ?>
+
                     <div class="filter-group">
                         <label for="theme">Select Theme</label>
                         <select id="theme" name="theme">
-                            <option value="">All Themes</option>
-                            <option value="city" <?= (isset($_GET['theme']) && $_GET['theme'] == 'city') ? 'selected' : '' ?>>City</option>
-                            <option value="star-wars" <?= (isset($_GET['theme']) && $_GET['theme'] == 'star-wars') ? 'selected' : '' ?>>Star Wars</option>
-                            <option value="technic" <?= (isset($_GET['theme']) && $_GET['theme'] == 'technic') ? 'selected' : '' ?>>Technic</option>
-                            <option value="creator" <?= (isset($_GET['theme']) && $_GET['theme'] == 'creator') ? 'selected' : '' ?>>Creator</option>
+                            <?php foreach ($themes as $theme) : ?>
+                                <option value="<?= $theme->id ?>" <?= (isset($_GET['theme']) && $_GET['theme'] == $theme->id) ? 'selected' : '' ?>>
+                                    <?= $theme->name ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
 
                     <div class="filter-group">
-                        <label for="Brand">Brands</label>
-                        <select id="Brand" name="Brand">
-                            <option value="">All Brands</option>
-                            <option value="Lego" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Lego') ? 'selected' : '' ?>>Lego</option>
-                            <option value="Kapla" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Kapla') ? 'selected' : '' ?>>Kapla</option>
-                            <option value="Duplo" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Duplo') ? 'selected' : '' ?>>Duplo</option>
-                            <option value="RoboTime" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'RoboTime') ? 'selected' : '' ?>>RoboTime</option>
-                            <option value="SmartMax" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'SmartMax') ? 'selected' : '' ?>>SmartMax</option>
-                            <option value="Brio" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Brio') ? 'selected' : '' ?>>Brio</option>
-                            <option value="Playmobil" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Playmobil') ? 'selected' : '' ?>>Playmobil</option>
-                            <option value="MegaBloks" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'MegaBloks') ? 'selected' : '' ?>>MegaBloks</option>
-                            <option value="MegaConstrux" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'MegaConstrux') ? 'selected' : '' ?>>MegaConstrux</option>
-                            <option value="Geomag" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Geomag') ? 'selected' : '' ?>>Geomag</option>
-                            <option value="KNEX" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'KNEX') ? 'selected' : '' ?>>KNEX</option>
-                            <option value="GraviTrax" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'GraviTrax') ? 'selected' : '' ?>>GraviTrax</option>
-                            <option value="Clementoni" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Clementoni') ? 'selected' : '' ?>>Clementoni</option>
+                        <label for="brand">Select Brand</label>
+                        <select id="brand" name="brand">
+                            <?php foreach ($brands as $brand) : ?>
+                                <option value="<?= $brand->id ?>" <?= (isset($_GET['brand']) && $_GET['brand'] == $brand->id) ? 'selected' : '' ?>>
+                                    <?= $brand->name ?>
+                                </option>
+                            <?php endforeach; ?>
                         </select>
                     </div>
-
-
 
                     <div class="filter-group radio-group">
                         <label>Price Range</label>
@@ -115,16 +120,49 @@
             </div>
 
             <div class="content">
+                <h2>Product Results</h2>
 
                 <?php
-                // Placehorder code 
-                //  if (count($filteredSets) > 0) {
-                //      foreach ($filteredSets as $set) {
-                //          echo "<div>{$set['name']} - \${$set['price']}</div>";
-                //      }
-                //  } else {
-                //      echo "<p>No sets found.</p>";
-                //  }
+                // Simuleer een lijst van LEGO-sets
+                $legoSets = [
+                    ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99],
+                    ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99],
+                    ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99],
+                    ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99]
+                ];
+
+                // Filter logic
+                $filteredSets = $legoSets;
+
+                if (isset($_GET['search']) && !empty($_GET['search'])) {
+                    $search = strtolower($_GET['search']);
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($search) {
+                        return strpos(strtolower($set['name']), $search) !== false;
+                    });
+                }
+
+                if (isset($_GET['theme']) && !empty($_GET['theme'])) {
+                    $theme = $_GET['theme'];
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($theme) {
+                        return $set['theme'] === $theme;
+                    });
+                }
+
+                if (isset($_GET['price']) && !empty($_GET['price'])) {
+                    list($minPrice, $maxPrice) = explode('-', $_GET['price']);
+                    $filteredSets = array_filter($filteredSets, function ($set) use ($minPrice, $maxPrice) {
+                        return $set['price'] >= $minPrice && $set['price'] <= $maxPrice;
+                    });
+                }
+
+                // Resultaat weergeven
+                if (count($filteredSets) > 0) {
+                    foreach ($filteredSets as $set) {
+                        echo "<div>{$set['name']} - \${$set['price']}</div>";
+                    }
+                } else {
+                    echo "<p>No sets found.</p>";
+                }
                 ?>
             </div>
         </div>
