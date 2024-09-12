@@ -38,11 +38,11 @@ class session
     {
         $session = null;
     
-        if (isset($_COOKIE["steptember-session"]))
+        if (isset($_COOKIE["speelhuys-session"]))
         {
             include "connectie.php";
     
-            $key = mysqli_real_escape_string($conn, $_COOKIE["steptember-session"]);
+            $key = mysqli_real_escape_string($conn, $_COOKIE["speelhuys-session"]);
     
             $query = "SELECT * FROM sessions WHERE session_key = '". $key ."' AND session_end > '". date("Y-m-d H:i:s") ."'";
             $resultaat = $conn->query($query);
