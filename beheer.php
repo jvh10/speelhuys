@@ -81,6 +81,7 @@ include "themes.php";
 
                     <?php
                     $themes = Theme::findAll();
+                    $brands = Brand::findAll();
 
                     ?>
 
@@ -90,6 +91,17 @@ include "themes.php";
                             <?php foreach ($themes as $theme) : ?>
                                 <option value="<?= $theme->id ?>" <?= (isset($_GET['theme']) && $_GET['theme'] == $theme->id) ? 'selected' : '' ?>>
                                     <?= $theme->name ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </select>
+                    </div>
+
+                    <div class="filter-group">
+                        <label for="brand">Select Brand</label>
+                        <select id="brand" name="brand">
+                            <?php foreach ($brands as $brand) : ?>
+                                <option value="<?= $brand->id ?>" <?= (isset($_GET['brand']) && $_GET['brand'] == $brand->id) ? 'selected' : '' ?>>
+                                    <?= $brand->name ?>
                                 </option>
                             <?php endforeach; ?>
                         </select>
