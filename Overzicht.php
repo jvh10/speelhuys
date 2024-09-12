@@ -96,46 +96,14 @@
                 <h2>Product Results</h2>
 
                 <?php
-                // Simuleer een lijst van LEGO-sets
-                $legoSets = [
-                    ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99],
-                    ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99],
-                    ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99],
-                    ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99]
-                ];
-
-                // Filter logic
-                $filteredSets = $legoSets;
-
-                if (isset($_GET['search']) && !empty($_GET['search'])) {
-                    $search = strtolower($_GET['search']);
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($search) {
-                        return strpos(strtolower($set['name']), $search) !== false;
-                    });
-                }
-
-                if (isset($_GET['theme']) && !empty($_GET['theme'])) {
-                    $theme = $_GET['theme'];
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($theme) {
-                        return $set['theme'] === $theme;
-                    });
-                }
-
-                if (isset($_GET['price']) && !empty($_GET['price'])) {
-                    list($minPrice, $maxPrice) = explode('-', $_GET['price']);
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($minPrice, $maxPrice) {
-                        return $set['price'] >= $minPrice && $set['price'] <= $maxPrice;
-                    });
-                }
-
-                // Resultaat weergeven
-                if (count($filteredSets) > 0) {
-                    foreach ($filteredSets as $set) {
-                        echo "<div>{$set['name']} - \${$set['price']}</div>";
-                    }
-                } else {
-                    echo "<p>No sets found.</p>";
-                }
+                // Placehorder code 
+              //  if (count($filteredSets) > 0) {
+              //      foreach ($filteredSets as $set) {
+              //          echo "<div>{$set['name']} - \${$set['price']}</div>";
+              //      }
+              //  } else {
+              //      echo "<p>No sets found.</p>";
+              //  }
                 ?>
             </div>
         </div>
