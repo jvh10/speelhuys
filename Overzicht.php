@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <?php
 
 include "connectie.php";
@@ -82,7 +83,6 @@ include "themes.php";
                     <?php
                     $themes = Theme::findAll();
                     $brands = Brand::findAll();
-
                     ?>
 
                     <div class="filter-group">
@@ -101,7 +101,7 @@ include "themes.php";
                     <div class="filter-group">
                         <label for="brand">Select Brand</label>
                         <select id="brand" name="brand">
-                        <option value="" <?= (!isset($_GET['brand']) || $_GET['brand'] == '') ? 'selected' : '' ?>>Alle Brand's</option>
+                            <option value="" <?= (!isset($_GET['brand']) || $_GET['brand'] == '') ? 'selected' : '' ?>>Alle Brands</option>
                             <?php foreach ($brands as $brand) : ?>
                                 <option value="<?= $brand->id ?>" <?= (isset($_GET['brand']) && $_GET['brand'] == $brand->id) ? 'selected' : '' ?>>
                                     <?= $brand->name ?>
@@ -125,51 +125,66 @@ include "themes.php";
             <div class="content">
                 <h2>Product Results</h2>
 
-                <?php
-                // Simuleer een lijst van LEGO-sets
-                $legoSets = [
-                    ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99],
-                    ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99],
-                    ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99],
-                    ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99]
-                ];
+                <div class="row">
+                    <?php
+                    // Simulated LEGO set data
+                    $legoSets = [
+                        ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99, 'image_url' => 'city_police.jpg'],
+                        ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99, 'image_url' => 'starwars_xwing.jpg'],
+                        ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99, 'image_url' => 'technic_bugatti.jpg'],
+                        ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99, 'image_url' => 'creator_buildings.jpg']
+                    ];
 
-                // Filter logic
-                $filteredSets = $legoSets;
+                    // Filter logic
+                    $filteredSets = $legoSets;
 
-                if (isset($_GET['search']) && !empty($_GET['search'])) {
-                    $search = strtolower($_GET['search']);
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($search) {
-                        return strpos(strtolower($set['name']), $search) !== false;
-                    });
-                }
-
-                if (isset($_GET['theme']) && !empty($_GET['theme'])) {
-                    $theme = $_GET['theme'];
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($theme) {
-                        return $set['theme'] === $theme;
-                    });
-                }
-
-                if (isset($_GET['price']) && !empty($_GET['price'])) {
-                    list($minPrice, $maxPrice) = explode('-', $_GET['price']);
-                    $filteredSets = array_filter($filteredSets, function ($set) use ($minPrice, $maxPrice) {
-                        return $set['price'] >= $minPrice && $set['price'] <= $maxPrice;
-                    });
-                }
-
-                // Resultaat weergeven
-                if (count($filteredSets) > 0) {
-                    foreach ($filteredSets as $set) {
-                        echo "<div>{$set['name']} - \${$set['price']}</div>";
+                    if (isset($_GET['search']) && !empty($_GET['search'])) {
+                        $search = strtolower($_GET['search']);
+                        $filteredSets = array_filter($filteredSets, function ($set) use ($search) {
+                            return strpos(strtolower($set['name']), $search) !== false;
+                        });
                     }
-                } else {
-                    echo "<p>No sets found.</p>";
-                }
-                ?>
+
+                    if (isset($_GET['theme']) && !empty($_GET['theme'])) {
+                        $theme = $_GET['theme'];
+                        $filteredSets = array_filter($filteredSets, function ($set) use ($theme) {
+                            return $set['theme'] === $theme;
+                        });
+                    }
+
+                    if (isset($_GET['price']) && !empty($_GET['price'])) {
+                        list($minPrice, $maxPrice) = explode('-', $_GET['price']);
+                        $filteredSets = array_filter($filteredSets, function ($set) use ($minPrice, $maxPrice) {
+                            return $set['price'] >= $minPrice && $set['price'] <= $maxPrice;
+                        });
+                    }
+
+                    // Display results
+                    if (count($filteredSets) > 0) {
+                        foreach ($filteredSets as $set) {
+                            ?>
+                            <div class="col-md-4 d-flex align-items-stretch mb-4">
+                                <div class="card" style="width: 100%;">
+                                    <img src="<?= $set['image_url'] ?>" class="card-img-top" alt="<?= $set['name'] ?>" style="height: 180px; object-fit: cover;">
+                                    <div class="card-body">
+                                        <h5 class="card-title"><?= $set['name'] ?></h5>
+                                        <p class="card-text">$<?= $set['price'] ?></p>
+                                        <a href="#" class="btn btn-primary">View Details</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        echo "<p>No sets found.</p>";
+                    }
+                    ?>
+                </div>
             </div>
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-Zf4FE/p50zJ8BGEg24moUjmNB7RGFJ8Fxb2UwCca++EQpgFqVYReeqASQUqsdMXK" crossorigin="anonymous"></script>
 </body>
 
 </html>
