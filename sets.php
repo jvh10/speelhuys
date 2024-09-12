@@ -144,12 +144,12 @@ class Set
         $conn = Database::start();
 
         $query = "SELECT * FROM sets";
-        $resultaat = $conn->query($query);
+        $result = $conn->query($query);
 
         $sets = [];
 
-        if ($resultaat->num_rows > 0) {
-            while ($row = $resultaat->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $set = new Set();
                 $set->id = $row['set_id'];
                 $set->name = $row['set_name'];
