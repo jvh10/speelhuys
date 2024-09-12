@@ -88,6 +88,7 @@ include "themes.php";
                     <div class="filter-group">
                         <label for="theme">Select Theme</label>
                         <select id="theme" name="theme">
+                            <option value="" <?= (!isset($_GET['theme']) || $_GET['theme'] == '') ? 'selected' : '' ?>>Alle Thema's</option>
                             <?php foreach ($themes as $theme) : ?>
                                 <option value="<?= $theme->id ?>" <?= (isset($_GET['theme']) && $_GET['theme'] == $theme->id) ? 'selected' : '' ?>>
                                     <?= $theme->name ?>
@@ -96,9 +97,11 @@ include "themes.php";
                         </select>
                     </div>
 
+
                     <div class="filter-group">
                         <label for="brand">Select Brand</label>
                         <select id="brand" name="brand">
+                        <option value="" <?= (!isset($_GET['brand']) || $_GET['brand'] == '') ? 'selected' : '' ?>>Alle Brand's</option>
                             <?php foreach ($brands as $brand) : ?>
                                 <option value="<?= $brand->id ?>" <?= (isset($_GET['brand']) && $_GET['brand'] == $brand->id) ? 'selected' : '' ?>>
                                     <?= $brand->name ?>
