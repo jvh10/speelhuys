@@ -34,7 +34,7 @@ if (count($_POST) > 0)
         $key = md5(uniqid(rand(), true));
     
         $session = new Session();
-        $session->userId =  $result[0]->id;
+        $session->id = $result[0]->id;
         $session->key = $key;
         $session->start = date("Y-m-d H:i:s");
         $session->end = date("Y-m-d H:i:s", strtotime("+1 month"));
