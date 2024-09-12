@@ -45,18 +45,18 @@ class session
             $key = mysqli_real_escape_string($conn, $_COOKIE["speelhuys-session"]);
     
             $query = "SELECT * FROM sessions WHERE session_key = '". $key ."' AND session_end > '". date("Y-m-d H:i:s") ."'";
-            $resultaat = $conn->query($query);
+            $result = $conn->query($query);
     
-            if ($resultaat->num_rows > 0)
+            if ($result->num_rows > 0)
             {
-                $rij = $resultaat->fetch_assoc();
+                $row = $result->fetch_assoc();
     
                 $session = new Session();
-                $session->id = $rij['session_id'];
-                $session->userId = $rij['session_user_id'];
-                $session->key = $rij['session_key'];
-                $session->start = $rij['session_start'];
-                $session->end = $rij['session_end'];
+                $session->id = $row['session_id'];
+                $session->userId = $row['session_user_id'];
+                $session->key = $row['session_key'];
+                $session->start = $row['session_start'];
+                $session->end = $row['session_end'];
             }
     
             $conn->close();

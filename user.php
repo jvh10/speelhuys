@@ -1,55 +1,55 @@
 <?php
 
-class Gebruiker
+class User
 {
-    public string $gebruikersnaam;
-    public string $wachtwoord;
+    public string $username;
+    public string $password;
     public string $id;
     public string $firstname;
     public string $lastname;
     public string $email;
     // dit is de methode waar gecheckt word of de inlog gegevens kloppen en waar ze te vinden zijn 
-    public static function inloggen($gebruikersnaam, $wachtwoord)
+    public static function logIn($username, $password)
     {
         $conn = Database::start();
-        $gebruiker = null;
+        $user = null;
 
-        $gebruikersnaam = mysqli_real_escape_string($conn, $gebruikersnaam);
-        $wachtwoord = mysqli_real_escape_string($conn, $wachtwoord);
+        $username = mysqli_real_escape_string($conn, $username);
+        $password = mysqli_real_escape_string($conn, $password);
 
-        $sql = "SELECT * FROM users WHERE user_username = '$gebruikersnaam' AND user_password = '$wachtwoord'";
-        $resultaat = $conn->query($sql);
+        $sql = "SELECT * FROM users WHERE user_username = '$username' AND user_password = '$password'";
+        $result = $conn->query($sql);
 
-        if ($resultaat->num_rows > 0) {
-            $rij = $resultaat->fetch_assoc();
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
 
-            $gebruiker = new Gebruiker();
-            $gebruiker->id = $rij['user_id'];
-            $gebruiker->firstname = $rij['user_firstname'];
-            $gebruiker->lastname = $rij['user_lastname'];
-            $gebruiker->email = $rij['user_email'];
+            $user = new User();
+            $user->id = $row['user_id'];
+            $user->firstname = $row['user_firstname'];
+            $user->lastname = $row['user_lastname'];
+            $user->email = $row['user_email'];
         }
         $conn->close();
-        return $gebruiker;
+        return $user;
     }
     // hier is de methode waar gezocht word naar het id van de gebruiker die is ingelogd  
-    public static function zoekId($id)
+    public static function searchId($id)
     {
         $conn = Database::start();
-        $gebruiker = null;
+        $user = null;
 
         $sql = "SELECT * FROM users WHERE user_id = $id";
-        $resultaat = $conn->query($sql);
-        if ($resultaat->num_rows > 0) {
-            $rij = $resultaat->fetch_assoc();
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
 
-            $gebruiker = new Gebruiker();
-            $gebruiker->id = $rij['user_id'];
-            $gebruiker->firstname = $rij['user_firstname'];
-            $gebruiker->lastname = $rij['user_lastname'];
-            $gebruiker->email = $rij['user_email'];
+            $user = new User();
+            $user->id = $row['user_id'];
+            $user->firstname = $row['user_firstname'];
+            $user->lastname = $row['user_lastname'];
+            $user->email = $row['user_email'];
         }
         $conn->close();
-        return $gebruiker;
+        return $user;
     }
 }
