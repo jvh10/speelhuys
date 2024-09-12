@@ -5,9 +5,45 @@
 </head>
 <body>
     <form action="$_POST">
-        <input type="text"> <br>
-        <input type="password"> <br>
+        <input type="text" name="Username" placeholder="Username"> <br>
+        <input type="password" name="Password" placeholder="Password"> <br>
         <button>Sign in</button>
     </form>
 </body>
 </html>
+
+<?php
+
+include "session.php";
+    include "connectie.php";
+    include "user.php";
+
+if (count($_POST) > 0)
+{
+    $username = $_POST["Username"];
+    $password = $_POST["Password"];
+    
+    $result = User::logIn($username, $password);
+    
+    if ($result == null)
+    {
+        echo '<script>alert("Wrong username or password. Please try again")</script>';
+    }
+    else
+    {
+        $key = md5(uniqid(rand(), true));
+    
+        $session = new Session();
+        $session->userId =  $result[0]->id;
+        $session->key = $key;
+        $session->start = date("Y-m-d H:i:s");
+        $session->end = date("Y-m-d H:i:s", strtotime("+1 month"));
+        $session->insert();
+    
+        setcookie("steptember-session", $key, strtotime("+1 month"), "/");
+        header("Location: overview.php");
+    
+        exit;
+    }
+}
+?>
