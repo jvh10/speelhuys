@@ -90,12 +90,12 @@ class Theme
         $conn = Database::start();
 
         $query = "SELECT * FROM themes";
-        $resultaat = $conn->query($query);
+        $result = $conn->query($query);
 
         $themes = [];
 
-        if ($resultaat->num_rows > 0) {
-            while ($row = $resultaat->fetch_assoc()) {
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
                 $theme = new Theme();
                 $theme->id = $row['theme_id'];
                 $theme->name = $row['theme_name'];
