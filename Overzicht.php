@@ -80,6 +80,28 @@
                         </select>
                     </div>
 
+                    <div class="filter-group">
+                        <label for="Brand">Brands</label>
+                        <select id="Brand" name="Brand">
+                            <option value="">All Brands</option>
+                            <option value="Lego" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Lego') ? 'selected' : '' ?>>Lego</option>
+                            <option value="Kapla" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Kapla') ? 'selected' : '' ?>>Kapla</option>
+                            <option value="Duplo" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Duplo') ? 'selected' : '' ?>>Duplo</option>
+                            <option value="RoboTime" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'RoboTime') ? 'selected' : '' ?>>RoboTime</option>
+                            <option value="SmartMax" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'SmartMax') ? 'selected' : '' ?>>SmartMax</option>
+                            <option value="Brio" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Brio') ? 'selected' : '' ?>>Brio</option>
+                            <option value="Playmobil" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Playmobil') ? 'selected' : '' ?>>Playmobil</option>
+                            <option value="MegaBloks" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'MegaBloks') ? 'selected' : '' ?>>MegaBloks</option>
+                            <option value="MegaConstrux" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'MegaConstrux') ? 'selected' : '' ?>>MegaConstrux</option>
+                            <option value="Geomag" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Geomag') ? 'selected' : '' ?>>Geomag</option>
+                            <option value="KNEX" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'KNEX') ? 'selected' : '' ?>>KNEX</option>
+                            <option value="GraviTrax" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'GraviTrax') ? 'selected' : '' ?>>GraviTrax</option>
+                            <option value="Clementoni" <?= (isset($_GET['Brand']) && $_GET['Brand'] == 'Clementoni') ? 'selected' : '' ?>>Clementoni</option>
+                        </select>
+                    </div>
+
+
+
                     <div class="filter-group radio-group">
                         <label>Price Range</label>
                         <label><input type="radio" name="price" value="0-25" <?= (isset($_GET['price']) && $_GET['price'] == '0-25') ? 'checked' : '' ?>> $0 - $25</label>
@@ -93,17 +115,16 @@
             </div>
 
             <div class="content">
-                <h2>Product Results</h2>
 
                 <?php
                 // Placehorder code 
-              //  if (count($filteredSets) > 0) {
-              //      foreach ($filteredSets as $set) {
-              //          echo "<div>{$set['name']} - \${$set['price']}</div>";
-              //      }
-              //  } else {
-              //      echo "<p>No sets found.</p>";
-              //  }
+                //  if (count($filteredSets) > 0) {
+                //      foreach ($filteredSets as $set) {
+                //          echo "<div>{$set['name']} - \${$set['price']}</div>";
+                //      }
+                //  } else {
+                //      echo "<p>No sets found.</p>";
+                //  }
                 ?>
             </div>
         </div>
