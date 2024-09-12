@@ -10,7 +10,7 @@ class session
 
     public function insert()
     {
-       include "connectie.php";
+       $conn = Database::start();
 
         $userId = mysqli_real_escape_string($conn, $this->userId);
         $key = mysqli_real_escape_string($conn, $this->key);
@@ -40,7 +40,7 @@ class session
     
         if (isset($_COOKIE["speelhuys-session"]))
         {
-            include "connectie.php";
+            $conn = Database::start();
     
             $key = mysqli_real_escape_string($conn, $_COOKIE["speelhuys-session"]);
     
