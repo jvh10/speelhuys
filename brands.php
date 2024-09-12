@@ -4,19 +4,23 @@ class Theme
 {
     public int $id;
     public string $name;
-
+    public string $logo;
+    
     // met deze functie kan je een nieuwe blog maken en opslaan in de database
     public function insert()
     {
         $conn = Database::start();
 
         $name = mysqli_real_escape_string($conn, $this->name);
+        $logo = mysqli_real_escape_string($conn, $this->logo);
 
-        $sql = "INSERT INTO themes (
-            theme_name
+        $sql = "INSERT INTO brands (
+            brand_name,
+            brand_logo
 
         )VALUES (
-            '" . $name . "'
+            '" . $name . "',
+            '" . $logo . "'
         )";
 
         $conn->query($sql);
@@ -30,15 +34,17 @@ class Theme
 
         $id = mysqli_real_escape_string($conn, $this->id);
         $name = mysqli_real_escape_string($conn, $this->name);
+        $logo = mysqli_real_escape_string($conn, $this->logo);
 
 
         $sql = "
             UPDATE
-                themes
+                brands
             SET
-                theme_name = '" . $name . "'
+                brand_name = '" . $name . "'
+                brand_logo = '" . $logo . "'
             WHERE
-                theme_id = " . $id . " 
+                brand_id = " . $id . " 
             ";
 
         $conn->query($sql);
@@ -54,9 +60,9 @@ class Theme
 
         $query = "
             DELETE FROM
-                    themes
+                    brands
             WHERE
-                    theme_id = '" . $id . "'
+                    brand_id = '" . $id . "'
         ";
 
         $conn->query($query);
@@ -69,20 +75,21 @@ class Theme
         $conn = Database::start();
         $id = mysqli_real_escape_string($conn, $id);
 
-        $sql = "SELECT * FROM themes WHERE theme_id = $id";
+        $sql = "SELECT * FROM brands WHERE brands_id = $id";
         $resultaat = $conn->query($sql);
 
-        $theme = null;
+        $brand = null;
 
         if ($resultaat->num_rows > 0) {
             while ($row = $resultaat->fetch_assoc()) {
-                $theme = new Theme();
-                $theme->id = $row['theme_id'];
-                $theme->name = $row['theme_name'];
+                $brand = new Theme();
+                $brand->id = $row['brand_id'];
+                $brand->name = $row['brand_name'];
+                $brand->logo = $row['brand_logo'];
             }
         }
         $conn->close();
-        return $theme;
+        return $brand;
     }
     // hier word een methode gemaakt om alle blogs op te halen uit de database 
     public static function findAll()
@@ -90,19 +97,20 @@ class Theme
         $conn = Database::start();
 
         $query = "SELECT * FROM themes";
-        $result = $conn->query($query);
+        $resultaat = $conn->query($query);
 
-        $themes = [];
+        $brands = [];
 
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                $theme = new Theme();
-                $theme->id = $row['theme_id'];
-                $theme->name = $row['theme_name'];
-                $themes[] = $theme;
+        if ($resultaat->num_rows > 0) {
+            while ($row = $resultaat->fetch_assoc()) {
+                $brand = new Theme();
+                $brand->id = $row['brand_id'];
+                $brand->name = $row['brand_name'];
+                $brand->logo = $row['brand_logo'];
+                $brands[] = $brand;
             }
         }
         $conn->close();
-        return $themes;
+        return $brands;
     }
 }
