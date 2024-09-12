@@ -34,14 +34,14 @@ if (count($_POST) > 0)
         $key = md5(uniqid(rand(), true));
     
         $session = new Session();
-        $session->id = $result[0]->id;
+        $session->userId = $result->id;
         $session->key = $key;
         $session->start = date("Y-m-d H:i:s");
         $session->end = date("Y-m-d H:i:s", strtotime("+1 month"));
         $session->insert();
     
         setcookie("steptember-session", $key, strtotime("+1 month"), "/");
-        header("Location: overview.php");
+        header("Location: Overzicht.php");
     
         exit;
     }
