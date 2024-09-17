@@ -2,12 +2,12 @@
 <html lang="nl">
 <?php
 
-include "connectie.php";
-include "sets.php";
-include "user.php";
-include "session.php";
-include "brands.php";
-include "themes.php";
+include "../classes/connectie.php";
+include "../classes/sets.php";
+include "../classes/user.php";
+include "../classes/session.php";
+include "../classes/brands.php";
+include "../classes/themes.php";
 
 ?>
 
@@ -64,11 +64,14 @@ include "themes.php";
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="Login.php">Sign up</a>
+                        <a class="nav-item nav-link" href="../Login.php">Sign up</a>
                     </div>
                 </div>
             </nav>
         </div>
+        <div class="col text-left">
+                <a href="insert.php" class="button" id="insertButton">Insert</a>
+            </div>
 
         <div class="row">
             <div class="col-2">
@@ -158,9 +161,11 @@ include "themes.php";
                                     <img src="upload/<?= $set->image; ?>" class="card-img-top" alt="...">
                                     <div class="card-body">
                                         <h5 class="card-title">Name: <?= $set->name ?></h5>
-                                        <p class="card-text">Author: <?= $set->price; ?></p>
+                                        <p class="card-text">Price: <?= $set->price; ?></p>
                                         <div class="card-body">
-                                            <a href="DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
+                                            <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
+                                            <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
+                                            <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
                                         </div>
                                     </div>
                                 </div>

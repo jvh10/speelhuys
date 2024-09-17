@@ -14,9 +14,9 @@
 
 <?php
 
-include "session.php";
-    include "connectie.php";
-    include "user.php";
+include "classes/session.php";
+    include "classes/connectie.php";
+    include "classes/user.php";
 
 if (count($_POST) > 0)
 {
@@ -41,7 +41,7 @@ if (count($_POST) > 0)
         $session->insert();
     
         setcookie("steptember-session", $key, strtotime("+1 month"), "/");
-        header("Location: Overzicht.php");
+        header("Location: Admin/beheer.php");
     
         exit;
     }
