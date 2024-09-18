@@ -1,6 +1,6 @@
 <?php
 
-class Theme
+class Brand
 {
     public int $id;
     public string $name;
@@ -82,7 +82,7 @@ class Theme
 
         if ($resultaat->num_rows > 0) {
             while ($row = $resultaat->fetch_assoc()) {
-                $brand = new Theme();
+                $brand = new Brand();
                 $brand->id = $row['brand_id'];
                 $brand->name = $row['brand_name'];
                 $brand->logo = $row['brand_logo'];
@@ -96,14 +96,14 @@ class Theme
     {
         $conn = Database::start();
 
-        $query = "SELECT * FROM themes";
+        $query = "SELECT * FROM brands";
         $resultaat = $conn->query($query);
 
         $brands = [];
 
         if ($resultaat->num_rows > 0) {
             while ($row = $resultaat->fetch_assoc()) {
-                $brand = new Theme();
+                $brand = new Brand();
                 $brand->id = $row['brand_id'];
                 $brand->name = $row['brand_name'];
                 $brand->logo = $row['brand_logo'];

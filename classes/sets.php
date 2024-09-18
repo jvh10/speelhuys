@@ -12,6 +12,9 @@ class Set
     public string $age;
     public string $pieces;
     public string $stock;
+    public string $searchTheme;
+    public string $searchBrand;
+    public string $searchPrice;
     // met deze functie kan je een nieuwe blog maken en opslaan in de database
     public function insert()
     {
@@ -116,6 +119,8 @@ class Set
         $id = mysqli_real_escape_string($conn, $id);
 
         $sql = "SELECT * FROM sets WHERE set_id = $id";
+
+        echo $sql;
         $resultaat = $conn->query($sql);
 
         $set = null;
@@ -138,6 +143,51 @@ class Set
         $conn->close();
         return $set;
     }
+    public static function search(string $searchTheme, $searchBrand, $searchPrice)
+    {
+        $conn = Database::start();
+        $searchTheme = mysqli_real_escape_string($conn, $searchTheme);
+        $searchBrand = mysqli_real_escape_string($conn, $searchBrand);
+        $searchPrice = mysqli_real_escape_string($conn, $searchPrice);
+
+        $where = [];
+        if ($searchTheme != "all") {
+            $where[] = "set_theme = $searchTheme";
+            
+        }
+
+        if ($where != "") {
+            $where[] = " WHERE . $where . set_brand = $searchBrand";
+        }
+        if($where != "") {
+            $where[] = "wHERE . $where . set_price = $searchPrice";
+        }
+       
+            $sql = "SELECT * FROM sets ". $where;
+
+            echo $sql;
+            $resultaat = $conn->query($sql);
+
+            $set = null;
+
+            if ($resultaat->num_rows > 0) {
+                while ($row = $resultaat->fetch_assoc()) {
+                    $set = new Set();
+                    $set->id = $row['set_id'];
+                    $set->name = $row['set_name'];
+                    $set->description = $row['set_description'];
+                    $set->brandId = $row['set_brand_id'];
+                    $set->themeId = $row['set_theme_id'];
+                    $set->image = $row['set_image'];
+                    $set->price = $row['set_price'];
+                    $set->age = $row['set_age'];
+                    $set->pieces = $row['set_pieces'];
+                    $set->stock = $row['set_stock'];
+                }
+            }
+            $conn->close();
+            return $set;
+        }
     // hier word een methode gemaakt om alle blogs op te halen uit de database 
     public static function findAll()
     {
