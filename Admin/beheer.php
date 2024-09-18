@@ -58,20 +58,16 @@ include "../classes/themes.php";
     <div class="container-fluid">
         <div class="row">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-                <a class="navbar-brand" href="overzicht.php">Products</a>
+                <a class="navbar-brand" href="../Overzicht.php">Overzicht</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="../Login.php">Sign up</a>
-                    </div>
-                </div>
+
             </nav>
         </div>
-        <div class="col text-left">
-                <a href="insert.php" class="button" id="insertButton">Insert</a>
-            </div>
+        <div class="col text-right">
+            <a href="insert.php" class="button" id="insertButton">Insert</a>
+        </div>
 
         <div class="row">
             <div class="col-2">
@@ -87,6 +83,7 @@ include "../classes/themes.php";
                         $themes = Theme::findAll();
                         $brands = Brand::findAll();
                         $sets = Set::findAll();
+                        
 
                         ?>
 
@@ -130,50 +127,57 @@ include "../classes/themes.php";
                         <button type="submit" class="btn btn-primary">Apply Filters</button>
                     </form>
                 </div>
-
-                <!--            <div class="content">
-                <h2>Product Results</h2> -->
-
-                <?php
-                //$searchTheme = $_GET["theme"];
-                //$searchBrand = $_GET["brand"];
-                //$searchPrice = $_GET["price"];
-
-                //$sets = Set::search($searchTheme, $searchBrand, $searchPrice);
-                //foreach ($sets as $set) {
-                //   echo "<tr>";
-                //   echo "<td>" . $set->id . "</td>";
-                //  echo "<td>" . $set->name . "</td";
-                //  echo "</tr>";
-                //}
-                ?>
             </div>
-            <table>
-                <thead>
-                </thead>
-                <tbody id="beheer">
-                    <?php
-                    // hier word een card gemaakt waar de afbeeelding word gepost, de titel, de auteur, een link naar de detail pagina
-                    foreach ($sets as $set) { ?>
-                        <tr>
-                            <div class="col-3">
-                                <div class="card" style="width: 18rem;">
-                                    <img src="upload/<?= $set->image; ?>" class="card-img-top" alt="...">
-                                    <div class="card-body">
-                                        <h5 class="card-title">Name: <?= $set->name ?></h5>
-                                        <p class="card-text">Price: <?= $set->price; ?></p>
-                                        <div class="card-body">
-                                            <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
-                                            <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
-                                            <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+            <div class="col-3">
+                <div class="content">
+                    <h2>Product Results
+
+                        <?php
+                        //$searchTheme = $_GET["theme"];
+                        //$searchBrand = $_GET["brand"];
+                        //$searchPrice = $_GET["price"];
+
+                        //$sets = Set::search($searchTheme, $searchBrand, $searchPrice);
+                        //foreach ($sets as $set) {
+                        //   echo "<tr>";
+                        //   echo "<td>" . $set->id . "</td>";
+                        //  echo "<td>" . $set->name . "</td";
+                        //  echo "</tr>";
+                        //}
+                        ?>
+                </div>
+                <table>
+                    <thead>
+                    </thead>
+                    <tbody id="beheer">
+                        <?php
+                        if ($sets) {
+                            foreach ($sets as $set) { ?>
+                                <tr>
+                                    <div class="col-3">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="<?= $set->image; ?>" class="card-img-top" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Name: <?= $set->name ?></h5>
+                                                <p class="card-text">Price: $<?= $set->price; ?></p>
+                                                <div class="card-body">
+                                                    <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
+                                                    <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
+                                                    <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
+                                </tr>
+                        <?php
+                            }
+                        } else {
+                            echo "<p>No sets found matching your criteria.</p>";
                         }
-                            ?>
-                </tbody>
-            </table>
+                        ?>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </body>

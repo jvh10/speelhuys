@@ -3,12 +3,12 @@
 
 <?php
 
-include "connectie.php";
-include "sets.php";
-include "user.php";
-include "session.php";
-include "brands.php";
-include "themes.php";
+include "classes/connectie.php";
+include "classes/sets.php";
+include "classes/user.php";
+include "classes/session.php";
+include "classes/brands.php";
+include "classes/themes.php";
 
 ?>
 
@@ -65,7 +65,7 @@ include "themes.php";
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="index.php">Sign up</a>
+                        <a class="nav-item nav-link" href="Login.php">Sign up</a>
                     </div>
                 </div>
             </nav>

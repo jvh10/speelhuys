@@ -3,11 +3,11 @@ include "../classes/connectie.php";
 include "../classes/sets.php";
 include "../classes/session.php";
 // Hier word ervoor gezorgd dat de website extra beveiligd word
-$session = Session::findActivesession();
-if ($session == null) {
-    header("beheer.php");
-    exit;
-}
+//$session = Session::findActivesession();
+//if ($session == null) {
+//    header("beheer.php");
+//    exit;
+//}
 
 $image = null;
 // hier word het id opgehaald 
@@ -55,7 +55,6 @@ if (isset($_POST["title"])) {
     <link rel="stylesheet" href="../css/jquery-te-1.4.0.css">
     <link rel="stylesheet" href="../css/admin.css">
 </head>
-</head>
 <!-- Hieronder worden in de velden de opgeslagen gevens uitgeput op de goede plek, zodat je het makkelijk kan aanpassen-->
 <body id="insert">
     <div class="container-fluid">
@@ -66,9 +65,6 @@ if (isset($_POST["title"])) {
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-                    <div class="navbar-nav">
-                        <a class="nav-item nav-link" href="../Login.php">Sign up</a>
-                    </div>
                 </div>
             </nav>
         </div>
@@ -145,7 +141,7 @@ if (isset($_POST["title"])) {
                         <br>
                         <div class="form-group">
                             <label for="description">Description :</label>
-                            <textarea class="jqte" id="description" name="description" required></textarea>
+                            <textarea class="jqte" id="description" name="description" required><?php echo $set->description ?></textarea>
                         </div>
                         <br>
                         <button type="submit" name="addSet" class="btn btn-dark">Voeg blog toe</button>

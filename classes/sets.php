@@ -1,5 +1,4 @@
 <?php
-
 class Set
 {
     public int $id;
@@ -120,7 +119,7 @@ class Set
 
         $sql = "SELECT * FROM sets WHERE set_id = $id";
 
-        echo $sql;
+
         $resultaat = $conn->query($sql);
 
         $set = null;
@@ -153,41 +152,40 @@ class Set
         $where = [];
         if ($searchTheme != "all") {
             $where[] = "set_theme = $searchTheme";
-            
         }
 
         if ($where != "") {
             $where[] = " WHERE . $where . set_brand = $searchBrand";
         }
-        if($where != "") {
+        if ($where != "") {
             $where[] = "wHERE . $where . set_price = $searchPrice";
         }
-       
-            $sql = "SELECT * FROM sets ". $where;
 
-            echo $sql;
-            $resultaat = $conn->query($sql);
+        $sql = "SELECT * FROM sets " . $where;
 
-            $set = null;
+        echo $sql;
+        $resultaat = $conn->query($sql);
 
-            if ($resultaat->num_rows > 0) {
-                while ($row = $resultaat->fetch_assoc()) {
-                    $set = new Set();
-                    $set->id = $row['set_id'];
-                    $set->name = $row['set_name'];
-                    $set->description = $row['set_description'];
-                    $set->brandId = $row['set_brand_id'];
-                    $set->themeId = $row['set_theme_id'];
-                    $set->image = $row['set_image'];
-                    $set->price = $row['set_price'];
-                    $set->age = $row['set_age'];
-                    $set->pieces = $row['set_pieces'];
-                    $set->stock = $row['set_stock'];
-                }
+        $set = null;
+
+        if ($resultaat->num_rows > 0) {
+            while ($row = $resultaat->fetch_assoc()) {
+                $set = new Set();
+                $set->id = $row['set_id'];
+                $set->name = $row['set_name'];
+                $set->description = $row['set_description'];
+                $set->brandId = $row['set_brand_id'];
+                $set->themeId = $row['set_theme_id'];
+                $set->image = $row['set_image'];
+                $set->price = $row['set_price'];
+                $set->age = $row['set_age'];
+                $set->pieces = $row['set_pieces'];
+                $set->stock = $row['set_stock'];
             }
-            $conn->close();
-            return $set;
         }
+        $conn->close();
+        return $set;
+    }
     // hier word een methode gemaakt om alle blogs op te halen uit de database 
     public static function findAll()
     {
@@ -216,5 +214,92 @@ class Set
         }
         $conn->close();
         return $sets;
+    }
+
+    public static function filter()
+    {
+        $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+        $selectedTheme = isset($_GET['theme']) && $_GET['theme'] !== 'all' ? $_GET['theme'] : null;
+        $selectedBrand = isset($_GET['brand']) && $_GET['brand'] !== 'all' ? $_GET['brand'] : null;
+        $selectedPrice = isset($_GET['price']) && $_GET['price'] !== 'all' ? $_GET['price'] : null;
+
+        // Maak de verbinding met de database
+            $conn = Database::start();
+
+        // Begin met de basis SQL-query
+        $query = "SELECT * FROM sets WHERE 1=1";
+
+        // Zoekterm filter
+        if (!empty($searchTerm)) {
+            $query .= " AND name LIKE ?";
+        }
+
+        // Thema filter
+        if ($selectedTheme) {
+            $query .= " AND theme_id = ?";
+        }
+
+        // Merk filter
+        if ($selectedBrand) {
+            $query .= " AND brand_id = ?";
+        }
+
+        // Prijs filter
+        if ($selectedPrice) {
+            // Prijscategorie bepalen
+            switch ($selectedPrice) {
+                case '0-25':
+                    $query .= " AND price BETWEEN 0 AND 25";
+                    break;
+                case '25-50':
+                    $query .= " AND price BETWEEN 25 AND 50";
+                    break;
+                case '50-100':
+                    $query .= " AND price BETWEEN 50 AND 100";
+                    break;
+                case '100-200':
+                    $query .= " AND price BETWEEN 100 AND 200";
+                    break;
+            }
+        }
+
+        // Prepare de statement
+        $stmt = $conn->prepare($query);
+
+        // Bind de parameters dynamisch aan de statement
+        $types = '';
+        $params = [];
+
+        if (!empty($searchTerm)) {
+            $types .= 's'; // String type voor de zoekterm
+            $params[] = '%' . $searchTerm . '%';
+        }
+        if ($selectedTheme) {
+            $types .= 'i'; // Integer type voor thema ID
+            $params[] = $selectedTheme;
+        }
+        if ($selectedBrand) {
+            $types .= 'i'; // Integer type voor brand ID
+            $params[] = $selectedBrand;
+        }
+
+        // Bind de parameters als er filters zijn toegepast
+        if (!empty($params)) {
+            $stmt->bind_param($types, ...$params);
+        }
+
+        // Voer de query uit
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        // Haal de sets op
+        $sets = [];
+        while ($row = $result->fetch_object()) {
+            $sets[] = $row;
+        }
+
+        // Sluit de statement en verbinding
+        $stmt->close();
+        $conn->close();
     }
 }
