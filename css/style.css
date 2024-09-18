@@ -58,3 +58,12 @@
   
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
+
+  form {
+    background-color: rgba(255, 255, 255, 0.9); 
+    padding: 15px; 
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 250px; 
+    
+  }
