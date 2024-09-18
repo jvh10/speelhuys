@@ -120,7 +120,6 @@ class Set
 
         $sql = "SELECT * FROM sets WHERE set_id = $id";
 
-        echo $sql;
         $resultaat = $conn->query($sql);
 
         $set = null;
