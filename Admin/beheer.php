@@ -83,6 +83,7 @@ include "../classes/themes.php";
                         $themes = Theme::findAll();
                         $brands = Brand::findAll();
                         $sets = Set::findAll();
+                        
 
                         ?>
 
@@ -150,26 +151,30 @@ include "../classes/themes.php";
                     </thead>
                     <tbody id="beheer">
                         <?php
-                        // hier word een card gemaakt waar de afbeeelding word gepost, de titel, de auteur, een link naar de detail pagina
-                        foreach ($sets as $set) { ?>
-                            <tr>
-                                <div class="col-3">
-                                    <div class="card" style="width: 18rem;">
-                                        <img src="<?= $set->image; ?>" class="card-img-top" alt="...">
-                                        <div class="card-body">
-                                            <h5 class="card-title">Name: <?= $set->name ?></h5>
-                                            <p class="card-text">Price: <?= $set->price; ?></p>
+                        if ($sets) {
+                            foreach ($sets as $set) { ?>
+                                <tr>
+                                    <div class="col-3">
+                                        <div class="card" style="width: 18rem;">
+                                            <img src="<?= $set->image; ?>" class="card-img-top" alt="...">
                                             <div class="card-body">
-                                                <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
-                                                <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
-                                                <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                <h5 class="card-title">Name: <?= $set->name ?></h5>
+                                                <p class="card-text">Price: $<?= $set->price; ?></p>
+                                                <div class="card-body">
+                                                    <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
+                                                    <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
+                                                    <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            <?php
+                                </tr>
+                        <?php
+                            }
+                        } else {
+                            echo "<p>No sets found matching your criteria.</p>";
                         }
-                            ?>
+                        ?>
                     </tbody>
                 </table>
             </div>
