@@ -129,10 +129,10 @@ include "classes/themes.php";
                     <?php
                     // Simulated LEGO set data
                     $legoSets = [
-                       // ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99, 'image_url' => 'city_police.jpg'],
-                        //['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99, 'image_url' => 'starwars_xwing.jpg'],
-                       // ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99, 'image_url' => 'technic_bugatti.jpg'],
-                       // ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99, 'image_url' => 'creator_buildings.jpg']
+                        ['name' => "LEGO City Police Station", 'theme' => "city", 'price' => 99.99, 'image_url' => 'city_police.jpg'],
+                        ['name' => "LEGO Star Wars X-Wing", 'theme' => "star-wars", 'price' => 49.99, 'image_url' => 'starwars_xwing.jpg'],
+                        ['name' => "LEGO Technic Bugatti Chiron", 'theme' => "technic", 'price' => 349.99, 'image_url' => 'technic_bugatti.jpg'],
+                        ['name' => "LEGO Creator Expert Modular Buildings", 'theme' => "creator", 'price' => 179.99, 'image_url' => 'creator_buildings.jpg']
                     ];
 
                     // Filter logic
