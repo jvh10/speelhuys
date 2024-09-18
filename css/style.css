@@ -59,13 +59,13 @@
   /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
   .show {display:block;}
 
-  #login {
+  * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-.login {
+body {
     font-family: Arial, sans-serif;
     background: linear-gradient(180deg, #3c3c3c, #f0f0f0);
     height: 100vh;
