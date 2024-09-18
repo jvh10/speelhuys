@@ -3,12 +3,12 @@
 
 <?php
 
-include "connectie.php";
-include "sets.php";
-include "user.php";
-include "session.php";
-include "brands.php";
-include "themes.php";
+include "classes/connectie.php";
+include "classes/sets.php";
+include "classes/user.php";
+include "classes/session.php";
+include "classes/brands.php";
+include "classes/themes.php";
 
 ?>
 
