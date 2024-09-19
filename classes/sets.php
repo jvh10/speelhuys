@@ -236,105 +236,76 @@ class Set
         return $sets;
     }
 
-    public static function filterSets($searchTerm = '', $themeId = null, $brandId = null, $priceRange = null)
+    public static function filterSets($searchTerm = '',  $themeId = null, $brandId = null, $priceRange = null, $age = null)
     {
         // Maak de database verbinding
+
         $conn = Database::start();
+
+        $priceRange = mysqli_real_escape_string($conn, $priceRange);
+
 
         // Begin met de basis query
         $query = "SELECT * FROM sets WHERE 1=1";
 
         // Zoekterm filter
         if (!empty($searchTerm)) {
-            $query .= " AND name LIKE ?";
+            $query .= " AND set_name LIKE '%" . mysqli_real_escape_string($conn, $searchTerm). "%'";
         }
 
         // Thema filter
         if ($themeId && $themeId !== 'all') {
-            $query .= " AND set_theme_id = ?";
+            $query .= " AND set_theme_id = " . mysqli_real_escape_string($conn, $themeId);
         }
 
         // Merk filter
         if ($brandId && $brandId !== 'all') {
-            $query .= " AND set_brand_id = ?";
+            $query .= " AND set_brand_id = " . mysqli_real_escape_string($conn, $brandId);
+        }
+
+        if ($age && $age !== 'all') {
+            $query .= " AND set_age = " . mysqli_real_escape_string($conn, $age);
         }
 
         // Prijs filter
         if ($priceRange && $priceRange !== 'all') {
             switch ($priceRange) {
                 case '0-25':
-                    $query .= " AND price BETWEEN 0 AND 25";
+                    $query .= " AND set_price BETWEEN 0 AND 25";
                     break;
                 case '25-50':
-                    $query .= " AND price BETWEEN 25 AND 50";
+                    $query .= " AND set_price BETWEEN 25 AND 50";
                     break;
                 case '50-100':
-                    $query .= " AND price BETWEEN 50 AND 100";
+                    $query .= " AND set_price BETWEEN 50 AND 100";
                     break;
                 case '100-200':
-                    $query .= " AND price BETWEEN 100 AND 200";
+                    $query .= " AND set_price BETWEEN 100 AND 200";
                     break;
             }
         }
 
-        echo $query;
+        $result = $conn->query($query);
 
-        // Prepare statement
-        $stmt = $conn->prepare($query);
+        $sets = [];
 
-        // Bind parameters
-        $types = '';
-        $params = [];
-
-        if (!empty($searchTerm)) {
-            $types .= 's';
-            $params[] = '%' . $searchTerm . '%';
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $set = new Set();
+                $set->id = $row['set_id'];
+                $set->name = $row['set_name'];
+                $set->description = $row['set_description'];
+                $set->brandId = $row['set_brand_id'];
+                $set->themeId = $row['set_theme_id'];
+                $set->image = $row['set_image'];
+                $set->price = $row['set_price'];
+                $set->age = $row['set_age'];
+                $set->pieces = $row['set_pieces'];
+                $set->stock = $row['set_stock'];
+                $sets[] = $set;
+            }
+            $conn->close();
+            return $sets;
         }
-
-        if ($themeId && $themeId !== 'all') {
-            $types .= 'i';
-            $params[] = $themeId;
-        }
-
-        if ($brandId && $brandId !== 'all') {
-            $types .= 'i';
-            $params[] = $brandId;
-        }
-
-        var_dump($params);
-
-        // Bind de parameters aan de query
-        if (!empty($params)) {
-            $stmt->bind_param($types, ...$params);
-        }
-
-        // Voer de query uit
-        if ($stmt->execute()) {
-            $result = $stmt->get_result();
-            $find = $result->fetch_all(MYSQLI_ASSOC);
-        } else {
-            echo "Error: " . $stmt->error;
-            return [];
-        }
-        // Sluit de verbinding
-        
-
-
-        foreach ($find as $row) {
-            $set = new Set();
-            $set->id = $row['set_id'];
-            $set->name = $row['set_name'];
-            $set->description = $row['set_description'];
-            $set->brandId = $row['set_brand_id'];
-            $set->themeId = $row['set_theme_id'];
-            $set->image = $row['set_image'];
-            $set->price = $row['set_price'];
-            $set->age = $row['set_age'];
-            $set->pieces = $row['set_pieces'];
-            $set->stock = $row['set_stock'];
-            $sets[] = $set;
-        }
-        $stmt->close();
-        $conn->close();
     }
 }

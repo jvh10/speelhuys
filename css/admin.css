@@ -1,0 +1,24 @@
+#insertButton {
+    margin-top: 5px;
+    height: 50px;
+    width: 20px;
+    color: black;
+
+  }
+
+  .button {
+    margin-top: 5px;
+    margin-left: 1000px;
+    font: bold 16px Arial;
+    line-height: 50px;
+    text-decoration: none;
+    background-color: yellow;
+    color: #333333;
+    padding: 2px 6px 2px 6px;
+    border-top: 1px solid #CCCCCC;
+    border-right: 1px solid #333333;
+    border-bottom: 1px solid #333333;
+    border-left: #CCCCCC;
+    width: 120px;
+    padding: 10px;
+}
