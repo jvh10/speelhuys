@@ -7,12 +7,13 @@
 }
 
 body {
-    background-color: #f4f4f4;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column; /* Aangepast om de navbar bovenaan te plaatsen */
+    background: linear-gradient(180deg, #3c3c3c, #f0f0f0);
     height: 100vh;
+    display: flex;
+    flex-direction: column; /* Zorgt ervoor dat de navbar bovenaan blijft */
+    align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
 /* Navigatiebalk */
@@ -21,6 +22,10 @@ body {
     background-color: #333;
     padding: 10px 0;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    position: fixed; /* Zet de navbar vast aan de bovenkant */
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Zorgt ervoor dat de navbar boven de content blijft */
 }
 
 .navbar ul {
@@ -40,15 +45,6 @@ body {
     padding: 8px 16px;
 }
 
-body {
-    font-family: Arial, sans-serif;
-    background: linear-gradient(180deg, #3c3c3c, #f0f0f0);
-    height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .navbar ul li a:hover {
     background-color: #555;
     border-radius: 4px;
@@ -63,9 +59,12 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     display: flex;
     overflow: hidden;
-    margin-top: 20px; /* Ruimte toevoegen tussen navbar en container */
+    margin-top: 100px; /* Ruimte creëren onder de navbar */
+    margin-bottom: 20px; /* Extra ruimte onder de container */
+    align-self: center; /* Centreert de container horizontaal */
 }
 
+/* Product afbeelding stijlen */
 .product-image {
     width: 40%;
     overflow: hidden;
@@ -77,6 +76,7 @@ body {
     display: block;
 }
 
+/* Product informatie stijlen */
 .product-info {
     padding: 20px;
     width: 60%;
