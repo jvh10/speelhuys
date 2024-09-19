@@ -56,7 +56,7 @@
 
     <!-- Product Description Section -->
     <div class="product-description">
-        <h2>Description</h2>
+        <h2>Description:</h2>
         <p><?php echo $product['description']; ?></p>
     </div>
 </body>
