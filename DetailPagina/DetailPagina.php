@@ -29,7 +29,7 @@
     // Voorbeeld productinformatie (in een echte situatie zou je dit uit een database halen)
     $product = [
         'name' => 'Lego City Fire Station',
-        'image' => '../images/fire-station.jpg', // Pad naar de afbeelding in de hoofdmap
+        'image' => '../upload/brio_trein_boerderij.png', // Pad naar de afbeelding in de hoofdmap
         'theme' => 'City',
         'company' => 'LEGO',
         'pieces' => 509,
