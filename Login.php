@@ -1,8 +1,10 @@
 <html>
 <head>
+    <!-- hier worden de bestanden voor de styling geinclude -->
     <link rel="stylesheet" href="css/style.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
+<!-- de klasse en het formulier voor de inlog -->
 <div class="login-container">
         <div class="logo">
             <img src="upload/Speelhuyslogo.png">
@@ -19,11 +21,11 @@
 </html>
 
 <?php
-
+//de php bestanden includen
 include "classes/session.php";
     include "classes/connectie.php";
     include "classes/user.php";
-
+// hier wordt gekeken of er iemand inlogt en of de inloggegevens juist zijn
 if (count($_POST) > 0)
 {
     $username = $_POST["Username"];
@@ -37,6 +39,8 @@ if (count($_POST) > 0)
     }
     else
     {
+        if ()
+        //hier wordt een sessie aangemaakt
         $key = md5(uniqid(rand(), true));
     
         $session = new Session();
