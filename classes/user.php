@@ -8,6 +8,7 @@ class User
     public string $firstname;
     public string $lastname;
     public string $email;
+    public string $role;
     // dit is de methode waar gecheckt word of de inlog gegevens kloppen en waar ze te vinden zijn 
     public static function logIn($username, $password)
     {
@@ -28,6 +29,7 @@ class User
             $user->firstname = $row['user_firstname'];
             $user->lastname = $row['user_lastname'];
             $user->email = $row['user_email'];
+            $user->role = $row['user_role'];
         }
         $conn->close();
         return $user;

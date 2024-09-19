@@ -18,6 +18,7 @@ if ($session == null) {
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="../css/admin.css">
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -69,9 +70,6 @@ if ($session == null) {
                 </button>
 
             </nav>
-        </div>
-        <div class="col text-right">
-            <a href="insert.php" class="button" id="insertButton">Insert</a>
         </div>
 
         <div class="row">
@@ -131,10 +129,15 @@ if ($session == null) {
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col">
                 <div class="content">
                     <div class="row">
-                        <h2>Product Results</h2>
+                        <div class="col">
+                            <h2>Product Results</h2>
+                        </div>
+                        <div class="col">
+                            <a href="insert.php" class="button" id="insertButton">Insert</a>
+                        </div>
                     </div>
                     <div class="row">
                         <table>
@@ -163,7 +166,6 @@ if ($session == null) {
                                                         <div class="card-body">
                                                             <a href="../DetailPagina.php?id=<?= $set->id; ?>" class="card-link">Detail</a>
                                                             <a href="edit.php?id=<?= $set->id; ?>" class="card-link">Edit</a>
-                                                            <a href="delete.php?id=<?= $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>

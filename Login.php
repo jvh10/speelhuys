@@ -39,7 +39,7 @@ if (count($_POST) > 0)
     }
     else
     {
-        if ()
+        
         //hier wordt een sessie aangemaakt
         $key = md5(uniqid(rand(), true));
     
@@ -54,6 +54,7 @@ if (count($_POST) > 0)
         header("Location: Admin/beheer.php");
     
         exit;
+        
     }
 }
 ?>
