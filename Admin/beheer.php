@@ -83,7 +83,7 @@ include "../classes/themes.php";
                         $themes = Theme::findAll();
                         $brands = Brand::findAll();
                         $sets = Set::findAll();
-                        
+
 
                         ?>
 
@@ -130,19 +130,19 @@ include "../classes/themes.php";
             </div>
             <div class="col-3">
                 <div class="content">
-                    <h2>Product Results
+                    <h2>Product Results</h2>
 
                         <?php
-                        //$searchTheme = $_GET["theme"];
-                        //$searchBrand = $_GET["brand"];
-                        //$searchPrice = $_GET["price"];
+                        //$searchTheme = $_GET['theme'];
+                        //$searchBrand = $_GET['brand'];
+                        //$searchPrice = $_GET['price'];
 
                         //$sets = Set::search($searchTheme, $searchBrand, $searchPrice);
                         //foreach ($sets as $set) {
-                        //   echo "<tr>";
-                        //   echo "<td>" . $set->id . "</td>";
-                        //  echo "<td>" . $set->name . "</td";
-                        //  echo "</tr>";
+                        //    echo "<tr>";
+                        //    echo "<td>" . $set->id . "</td>";
+                        //    echo "<td>" . $set->name . "</td";
+                        //    echo "</tr>";
                         //}
                         ?>
                 </div>
@@ -156,7 +156,7 @@ include "../classes/themes.php";
                                 <tr>
                                     <div class="col-3">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="upload/<?= $set->image; ?>" class="card-img-top" alt="...">
+                                            <img src="../upload/<?= $set->image; ?>" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title">Name: <?= $set->name ?></h5>
                                                 <p class="card-text">Price: $<?= $set->price; ?></p>
