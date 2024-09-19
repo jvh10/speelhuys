@@ -5,11 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
-    <link rel="stylesheet" href="Detail.css"> <!-- Gets the information of the CSS map -->
+    <link rel="stylesheet" href="Detail.css"> <!-- Verwijzing naar de CSS in dezelfde map -->
 </head>
 
 <body>
-    <!-- Navbar back to Overzicht.php -->
+    <!-- Navbar terug naar overzicht.php -->
     <nav class="navbar">
         <ul>
             <li><a href="../overzicht.php">Terug naar Overzicht</a></li> <!-- Verwijzing naar overzicht.php in de hoofdmap -->
@@ -24,42 +24,47 @@
     include "../classes/brands.php";
     include "../classes/themes.php";
 
-    // Retrieve the product ID from the URL
-    $id = isset($_GET['id']) ? $_GET['id'] : null;
+    // Haal ID uit de query parameter
+    $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
-    // Check if ID is present, then fetch the product details
+    // Controleren of ID aanwezig is en vervolgens productdetails ophalen
     if ($id) {
-        $product = Set::find($id); // Fetch the product details from the database
+        $product = Set::find($id); // Haal de productdetails op uit de database
     } else {
-        echo "<p>Product not found.</p>";
+        echo "<p>Product niet gevonden.</p>";
         exit;
     }
+
+    // Definieer het pad naar de uploadmap
+    $uploadDir = '../upload/'; // Correct pad naar de map 'upload'
+
     ?>
 
     <?php if ($product) : ?>
-        <!-- Product Details Container -->
+        <!-- Container voor productdetails -->
         <div class="container">
             <div class="product-image">
-                <img src="<?php echo $product->image; ?>" alt="<?php echo $product->name; ?>"> <!-- Afbeelding van het product -->
+                <!-- Zorg dat het volledige pad naar de afbeelding correct wordt weergegeven -->
+                <img src="<?php echo htmlspecialchars($uploadDir . $product->image); ?>" alt="<?php echo htmlspecialchars($product->name); ?>"> <!-- Afbeelding van het product -->
             </div>
             <div class="product-info">
-                <h1><?php echo $product->name; ?></h1>
-                <p><strong>Theme:</strong> <?php echo $product->themeId; ?></p>
-                <p><strong>Company:</strong> <?php echo $product->brandId; ?></p>
-                <p><strong>Number of Pieces:</strong> <?php echo $product->pieces; ?></p>
-                <p><strong>Age:</strong> <?php echo $product->age; ?></p>
-                <p><strong>Price:</strong> $<?php echo $product->price; ?></p>
-                <p><strong>Stock:</strong> <?php echo $product->stock; ?></p>
+                <h1><?php echo htmlspecialchars($product->name); ?></h1>
+                <p><strong>Thema:</strong> <?php echo htmlspecialchars($product->themeId); ?></p>
+                <p><strong>Bedrijf:</strong> <?php echo htmlspecialchars($product->brandId); ?></p>
+                <p><strong>Aantal Onderdelen:</strong> <?php echo htmlspecialchars($product->pieces); ?></p>
+                <p><strong>Leeftijd:</strong> <?php echo htmlspecialchars($product->age); ?></p>
+                <p><strong>Prijs:</strong> $<?php echo htmlspecialchars($product->price); ?></p>
+                <p><strong>Voorraad:</strong> <?php echo htmlspecialchars($product->stock); ?></p>
             </div>
         </div>
 
-        <!-- Product Description Section -->
+        <!-- Product Beschrijvingssectie -->
         <div class="product-description">
-            <h2>Description:</h2>
-            <p><?php echo $product->description; ?></p>
+            <h2>Beschrijving:</h2>
+            <p><?php echo htmlspecialchars($product->description); ?></p>
         </div>
     <?php else : ?>
-        <p>Product details not available.</p>
+        <p>Productdetails niet beschikbaar.</p>
     <?php endif; ?>
 </body>
 
