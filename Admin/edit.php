@@ -20,7 +20,7 @@ if ($set == null) {
     exit;
 }
 // als de title is gepost dan worden de gegevens geupdate 
-if (isset($_POST["title"])) {
+if (isset($_POST["name"])) {
     $image = $set->image;
 
     if (!empty($_FILES["bestand"]["name"])) {
@@ -43,7 +43,7 @@ if (isset($_POST["title"])) {
     $set->stock = $_POST['stock'];
     $set->update();
 
-    header("Location: beheer.php?message=Set is updated");
+    header("Location: beheerAdmin.php?message=Set is updated");
 }
 ?>
 <!DOCTYPE html>

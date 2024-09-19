@@ -11,7 +11,7 @@ include "../classes/themes.php";
 
 $session = Session::findActivesession();
 if ($session == null) {
-    header("Location: beheer.php");
+    header("Location: ../Overzicht.php");
     exit;
 }
 

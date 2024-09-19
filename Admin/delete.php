@@ -6,7 +6,7 @@ include "../classes/session.php";
 // Hier word ervoor gezorgd dat de website extra beveiligd word
 $session = Session::findActivesession();
 if ($session == null) {
-    header ("Location: beheer.php");
+    header ("Location: beheerAdmin.php");
     exit;
 }
 // hier word het id opgehaald 
@@ -21,4 +21,4 @@ if ($set == null) {
 // de blog word hier gedelete
 $set->delete();
 // je word hier geredirect naar de admin pagina
-header ("Location: beheer.php");
+header ("Location: beheerAdmin.php");

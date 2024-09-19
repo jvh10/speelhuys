@@ -35,7 +35,7 @@ if (isset($_POST["addSet"])) {
 
     $set->insert();
 
-    header("Location: beheer.php?message=Set is created");
+    header("Location: beheerAdmin.php?message=Set is created");
 }
 
 ?>
