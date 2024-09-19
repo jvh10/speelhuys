@@ -50,6 +50,7 @@ class User
             $user->firstname = $row['user_firstname'];
             $user->lastname = $row['user_lastname'];
             $user->email = $row['user_email'];
+            $user->role = $row['user_role'];
         }
         $conn->close();
         return $user;

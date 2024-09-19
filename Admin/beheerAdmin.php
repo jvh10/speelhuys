@@ -14,6 +14,8 @@ if ($session == null) {
     header("Location: beheer.php");
     exit;
 }
+
+$userRole = User::searchId($session->userId);
 ?>
 
 <head>
@@ -149,7 +151,6 @@ if ($session == null) {
 
                                 // Roep de SetFilter klasse aan om de sets op te halen
                                 $sets = Set::filterSets($searchTerm, $themeId, $brandId, $priceRange);
-
                                 // Toon de resultaten
                                 if ($sets) {
                                     foreach ($sets as $set) { ?>
@@ -163,7 +164,14 @@ if ($session == null) {
                                                         <div class="card-body">
                                                             <a href="../DetailPagina.php?id=<?= $set->id; ?>" class="card-link">Detail</a>
                                                             <a href="edit.php?id=<?= $set->id; ?>" class="card-link">Edit</a>
-                                                            <a href="delete.php?id=<?= $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                            <?php
+
+                                                            if ($userRole->role == "admin") {
+                                                            ?>
+                                                                <a href="delete.php?id=<?= $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                            <?php } else {
+                                                            }
+                                                            ?>
                                                         </div>
                                                     </div>
                                                 </div>
