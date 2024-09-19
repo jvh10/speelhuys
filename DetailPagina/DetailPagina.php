@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
-    <link rel="stylesheet" href="Detail.css"> <!-- Verwijzing naar het CSS-bestand in de hoofdmap -->
+    <link rel="stylesheet" href="Detail.css"> <!-- Gets the information of the CSS map -->
 </head>
 <body>
-    <!-- Navigatiebalk -->
+    <!-- Navbar back to Overzicht.php -->
     <nav class="navbar">
         <ul>
             <li><a href="../overzicht.php">Terug naar Overzicht</a></li> <!-- Verwijzing naar overzicht.php in de hoofdmap -->
