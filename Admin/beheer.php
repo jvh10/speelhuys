@@ -156,7 +156,7 @@ include "../classes/themes.php";
                                 <tr>
                                     <div class="col-3">
                                         <div class="card" style="width: 18rem;">
-                                            <img src="<?= $set->image; ?>" class="card-img-top" alt="...">
+                                            <img src="upload/<?= $set->image; ?>" class="card-img-top" alt="...">
                                             <div class="card-body">
                                                 <h5 class="card-title">Name: <?= $set->name ?></h5>
                                                 <p class="card-text">Price: $<?= $set->price; ?></p>
@@ -181,5 +181,6 @@ include "../classes/themes.php";
         </div>
     </div>
 </body>
+
 
 </html>
