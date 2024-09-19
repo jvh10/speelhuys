@@ -94,3 +94,26 @@ body {
 .product-info p strong {
     color: #333;
 }
+
+/* Product Description Section */
+.product-description {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px; /* Ruimte onder de beschrijving */
+    text-align: center;
+}
+
+.product-description h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.product-description p {
+    font-size: 16px;
+    color: #666;
+}
