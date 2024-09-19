@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Product Detail</title>
     <link rel="stylesheet" href="Detail.css"> <!-- Gets the information of the CSS map -->
 </head>
+
 <body>
     <!-- Navbar back to Overzicht.php -->
     <nav class="navbar">
@@ -15,6 +17,15 @@
     </nav>
 
     <?php
+
+    include "../classes/connectie.php";
+    include "../classes/sets.php";
+    include "../classes/user.php";
+    include "../classes/session.php";
+    include "../classes/brands.php";
+    include "../classes/themes.php";
+
+
     // Voorbeeld productinformatie (in een echte situatie zou je dit uit een database halen)
     $product = [
         'name' => 'Lego City Fire Station',
@@ -42,4 +53,5 @@
         </div>
     </div>
 </body>
+
 </html>
