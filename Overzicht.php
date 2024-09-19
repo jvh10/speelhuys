@@ -169,7 +169,7 @@ include "classes/themes.php";
                                     <div class="card-body">
                                         <h5 class="card-title"><?= $set['name'] ?></h5>
                                         <p class="card-text">$<?= $set['price'] ?></p>
-                                        <a href="#" class="btn btn-primary">View Details</a>
+                                        <a href="DetailPagina.php"btn btn-primary">View Details</a>
                                     </div>
                                 </div>
                             </div>
