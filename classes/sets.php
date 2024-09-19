@@ -149,18 +149,41 @@ class Set
         $searchBrand = mysqli_real_escape_string($conn, $searchBrand);
         $searchPrice = mysqli_real_escape_string($conn, $searchPrice);
 
-        $where = [];
-        if ($searchTheme != "all") {
-            $where[] = "set_theme = $searchTheme";
+        $query = "SELECT * FROM sets WHERE 1=1";
+
+        // Zoekterm filter
+        if (!empty($searchTerm)) {
+            $query .= " AND name LIKE ?";
         }
 
-        if ($where != "") {
-            $where[] = " WHERE . $where . set_brand = $searchBrand";
-        }
-        if ($where != "") {
-            $where[] = "wHERE . $where . set_price = $searchPrice";
+        // Thema filter
+        if ($searchTheme) {
+            $query .= " AND theme_id = ?";
         }
 
+        // Merk filter
+        if ($searchBrand) {
+            $query .= " AND brand_id = ?";
+        }
+
+        // Prijs filter
+        if ($searchPrice) {
+            // Prijscategorie bepalen
+            switch ($searchPrice) {
+                case '0-25':
+                    $query .= " AND price BETWEEN 0 AND 25";
+                    break;
+                case '25-50':
+                    $query .= " AND price BETWEEN 25 AND 50";
+                    break;
+                case '50-100':
+                    $query .= " AND price BETWEEN 50 AND 100";
+                    break;
+                case '100-200':
+                    $query .= " AND price BETWEEN 100 AND 200";
+                    break;
+            }
+        }
         $sql = "SELECT * FROM sets " . $where;
 
         echo $sql;
