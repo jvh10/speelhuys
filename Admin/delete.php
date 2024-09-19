@@ -1,12 +1,12 @@
 <?php
 
-include "../classes/database.php";
-include "../classes/set.php";
-include "../classes/sessie.php";
+include "../classes/connectie.php";
+include "../classes/sets.php";
+include "../classes/session.php";
 // Hier word ervoor gezorgd dat de website extra beveiligd word
-$sessie = Sessie::vindActieveSessie();
-if ($sessie == null) {
-    header("beheer.php");
+$session = Session::findActivesession();
+if ($session == null) {
+    header ("Location: beheer.php");
     exit;
 }
 // hier word het id opgehaald 
@@ -19,6 +19,6 @@ if ($set == null) {
     exit;
 }
 // de blog word hier gedelete
-$blog->delete();
+$set->delete();
 // je word hier geredirect naar de admin pagina
-header("Location: beheer.php");
+header ("Location: beheer.php");

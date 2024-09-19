@@ -9,6 +9,11 @@ include "../classes/session.php";
 include "../classes/brands.php";
 include "../classes/themes.php";
 
+$session = Session::findActivesession();
+if ($session == null) {
+    header("Location: beheer.php");
+    exit;
+}
 ?>
 
 <head>
@@ -82,9 +87,6 @@ include "../classes/themes.php";
                         <?php
                         $themes = Theme::findAll();
                         $brands = Brand::findAll();
-                        $sets = Set::findAll();
-
-
                         ?>
 
                         <div class="filter-group">
@@ -105,7 +107,7 @@ include "../classes/themes.php";
                             <label for="brand">Select Brand</label>
                             <select id="brand" name="brand">
                                 <option value="all" <?= (!isset($_GET['brand']) || $_GET['brand'] == 'all') ? 'selected' : '' ?>>
-                                    All Themes
+                                    All Brands
                                 </option>
                                 <?php foreach ($brands as $brand) : ?>
                                     <option value="<?= $brand->id ?>" <?= (isset($_GET['brand']) && $_GET['brand'] == $brand->id) ? 'selected' : '' ?>>
@@ -128,59 +130,54 @@ include "../classes/themes.php";
                     </form>
                 </div>
             </div>
+
             <div class="col-3">
                 <div class="content">
                     <h2>Product Results</h2>
+                    <table>
+                        <thead></thead>
+                        <tbody id="beheer">
+                            <?php
+                            // Haal de filters op uit de query parameters
+                            $searchTerm = isset($_GET['search']) ? $_GET['search'] : '';
+                            $themeId = isset($_GET['theme']) ? $_GET['theme'] : 'all';
+                            $brandId = isset($_GET['brand']) ? $_GET['brand'] : 'all';
+                            $priceRange = isset($_GET['price']) ? $_GET['price'] : 'all';
 
-                        <?php
-                        //$searchTheme = $_GET['theme'];
-                        //$searchBrand = $_GET['brand'];
-                        //$searchPrice = $_GET['price'];
+                            // Roep de SetFilter klasse aan om de sets op te halen
+                            $sets = Set::filterSets($searchTerm, $themeId, $brandId, $priceRange);
 
-                        //$sets = Set::search($searchTheme, $searchBrand, $searchPrice);
-                        //foreach ($sets as $set) {
-                        //    echo "<tr>";
-                        //    echo "<td>" . $set->id . "</td>";
-                        //    echo "<td>" . $set->name . "</td";
-                        //    echo "</tr>";
-                        //}
-                        ?>
-                </div>
-                <table>
-                    <thead>
-                    </thead>
-                    <tbody id="beheer">
-                        <?php
-                        if ($sets) {
-                            foreach ($sets as $set) { ?>
-                                <tr>
-                                    <div class="col-3">
-                                        <div class="card" style="width: 18rem;">
-                                            <img src="../upload/<?= $set->image; ?>" class="card-img-top" alt="...">
-                                            <div class="card-body">
-                                                <h5 class="card-title">Name: <?= $set->name ?></h5>
-                                                <p class="card-text">Price: $<?= $set->price; ?></p>
+                            // Toon de resultaten
+                            if ($sets) {
+                                foreach ($sets as $set) { ?>
+                                    <tr>
+                                        <div class="col-3">
+                                            <div class="card" style="width: 18rem;">
+                                                <img src="../upload/<?= $set->image; ?>" class="card-img-top" alt="...">
                                                 <div class="card-body">
-                                                    <a href="../DetailPagina.php?id=<?php echo $set->id; ?>" class="card-link">Detail</a>
-                                                    <a href="edit.php?id=<?php echo $set->id; ?>" class="card-link">Edit</a>
-                                                    <a href="delete.php?id=<?php echo $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                    <h5 class="card-title">Name: <?= $set->name; ?></h5>
+                                                    <p class="card-text">Price: $<?= $set->price; ?></p>
+                                                    <div class="card-body">
+                                                        <a href="../DetailPagina.php?id=<?= $set->id; ?>" class="card-link">Detail</a>
+                                                        <a href="edit.php?id=<?= $set->id; ?>" class="card-link">Edit</a>
+                                                        <a href="delete.php?id=<?= $set->id; ?>" onclick="return confirm('Are you sure?')" class="card-link">Delete</a>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </tr>
-                        <?php
+                                    </tr>
+                            <?php
+                                }
+                            } else {
+                                echo "<p>No sets found matching your criteria.</p>";
                             }
-                        } else {
-                            echo "<p>No sets found matching your criteria.</p>";
-                        }
-                        ?>
-                    </tbody>
-                </table>
+                            ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
 </body>
-
 
 </html>
