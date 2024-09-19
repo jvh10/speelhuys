@@ -73,9 +73,6 @@ $userRole = User::searchId($session->userId);
 
             </nav>
         </div>
-        <div class="col text-right">
-            <a href="insert.php" class="button" id="insertButton">Insert</a>
-        </div>
 
         <div class="row">
             <div class="col-2">
@@ -134,10 +131,15 @@ $userRole = User::searchId($session->userId);
                 </div>
             </div>
 
-            <div class="col-9">
+            <div class="col">
                 <div class="content">
                     <div class="row">
-                        <h2>Product Results</h2>
+                        <div class="col">
+                            <h2>Product Results</h2>
+                        </div>
+                        <div class="col">
+                            <a href="insert.php" class="button" id="insertButton">Insert</a>
+                        </div>
                     </div>
                     <div class="row">
                         <table>
@@ -163,7 +165,7 @@ $userRole = User::searchId($session->userId);
                                                         <h5 class="card-title">Name: <?= $set->name; ?></h5>
                                                         <p class="card-text">Price: $<?= $set->price; ?></p>
                                                         <div class="card-body">
-                                                            <a href="../DetailPagina.php?id=<?= $set->id; ?>" class="card-link">Detail</a>
+                                                            <a href="../DetailPagina/DetailPagina.php?id=<?= $set->id; ?>" class="card-link">Detail</a>
                                                             <a href="edit.php?id=<?= $set->id; ?>" class="card-link">Edit</a>
                                                             <?php
 
