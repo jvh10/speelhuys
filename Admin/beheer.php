@@ -133,17 +133,17 @@ include "../classes/themes.php";
                     <h2>Product Results</h2>
 
                         <?php
-                        $searchTheme = $_GET['theme'];
-                        $searchBrand = $_GET['brand'];
-                        $searchPrice = $_GET['price'];
+                        //$searchTheme = $_GET['theme'];
+                        //$searchBrand = $_GET['brand'];
+                        //$searchPrice = $_GET['price'];
 
-                        $sets = Set::search($searchTheme, $searchBrand, $searchPrice);
-                        foreach ($sets as $set) {
-                            echo "<tr>";
-                            echo "<td>" . $set->id . "</td>";
-                            echo "<td>" . $set->name . "</td";
-                            echo "</tr>";
-                        }
+                        //$sets = Set::search($searchTheme, $searchBrand, $searchPrice);
+                        //foreach ($sets as $set) {
+                        //    echo "<tr>";
+                        //    echo "<td>" . $set->id . "</td>";
+                        //    echo "<td>" . $set->name . "</td";
+                        //    echo "</tr>";
+                        //}
                         ?>
                 </div>
                 <table>
