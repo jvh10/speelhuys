@@ -262,7 +262,7 @@ class Set
                     break;
             }
         }
-
+        echo "<pre>$query</pre>"; // Dit toont de query voor debugging
         // Prepare de statement
         $stmt = $conn->prepare($query);
 
