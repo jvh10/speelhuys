@@ -33,7 +33,8 @@
         'pieces' => 509,
         'age' => '5-12',
         'price' => '59.99',
-        'description' => 'This LEGO City Fire Station set includes a three-story fire station building with an office, relaxation room, and lookout tower, as well as a small toy fire truck, fire hose, and toy motorbike. It\'s perfect for kids aged 5-12 years who love building and playing out emergency rescue scenarios.'
+        'description' => 'This LEGO City Fire Station set includes a three-story fire station building with an office, relaxation room, and lookout tower, as well as a small toy fire truck, fire hose, and toy motorbike. It\'s perfect for kids aged 5-12 years who love building and playing out emergency rescue scenarios.',
+        'Stock' => '5'
     ];
     ?>
 
@@ -48,7 +49,8 @@
             <p><strong>Company:</strong> <?php echo $product['company']; ?></p>
             <p><strong>Number of Pieces:</strong> <?php echo $product['pieces']; ?></p>
             <p><strong>Age:</strong> <?php echo $product['age']; ?></p>
-            <p><strong>Price:</strong> €<?php echo $product['price']; ?></p>
+            <p><strong>Price:</strong> $<?php echo $product['price']; ?></p>
+            <p><strong>Stock:</strong> <?php echo $product['Stock']; ?></p>
         </div>
     </div>
 
