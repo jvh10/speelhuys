@@ -51,7 +51,7 @@ if (count($_POST) > 0)
         $session->insert();
     
         setcookie("speelhuys-session", $key, strtotime("+1 month"), "/");
-        header("Location: Admin/beheer.php");
+        header("Location: Admin/beheerAdmin.php");
     
         exit;
         
